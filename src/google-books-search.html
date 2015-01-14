@@ -1,0 +1,235 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-input/core-input.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/juicy-html/juicy-html.html">
+
+<polymer-element name="google-books-search" attributes="query maxResults orderBy subtitleMaxLength snippetMaxLength">
+  <template>
+    <style>
+      :host {
+        font-family: sans-serif;
+      }
+      core-icon-button {
+        margin: 0;
+        padding: 0;
+      }
+      core-icon-button:hover:not([disabled]),
+      core-icon-button:active:not([disabled]) {
+        background-color: transparent;
+        box-shadow: none;
+      }
+      .search-wrapper {
+        border: 1px solid gray;
+        display: inline-block;
+        margin: 0;
+        padding: 0 5px;
+      }
+      .search-label {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+      }
+      .search {
+        -webkit-appearance: none;
+        vertical-align: middle;
+      }
+      .search::-webkit-search-decoration {
+        display: none;
+      }
+      .items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .item-preview-link {
+        text-decoration: none;
+      }
+      .item-preview-link:hover {
+        text-decoration: underline;
+      }
+      .item-title {
+        font-size: 18px;
+        margin-bottom: 0;
+      }
+      .item-info {
+        font-size: 14px;
+        margin-bottom: 1em;
+      }
+      .item-details:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .item-cover {
+        float: left;
+        margin-right: .5em;
+      }
+      .item-snippet {
+        font-size: 14px;
+        overflow: hidden;
+      }
+    </style>
+    <core-ajax
+      id="coreajax"
+      url="https://www.googleapis.com/books/v1/volumes"
+      params='{"q": "{{query}}", "maxResults": "{{maxResults}}", "orderBy": "{{orderBy}}", "fields": "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"}'
+      handleAs="json"
+      on-core-response="{{handleResponse}}"
+      on-core-error="{{handleError}}">
+    </core-ajax>
+    <div class="search-wrapper">
+      <label class="search-label" for="search">Search Terms</label>
+      <input
+        is="core-input"
+        id="search"
+        class="search"
+        autocomplete="off"
+        type="search"
+        on-change="{{handleChange}}"
+        on-error="{{handleError}}"
+        placeholder="Enter searchterm here"
+        value="{{value}}"
+        committedValue="{{committedValue}}" />
+      <core-icon-button icon="search"></core-icon-button>
+    </div>
+    <ul class="items">
+      <template id="items" repeat="{{item in items}}">
+        <li>
+          <article>
+            <h1 class="item-title">
+              <a class="item-preview-link" href="{{item.volumeInfo.previewLink}}" target="_blank">
+                {{item.volumeInfo.title}}<template if="{{item.volumeInfo.subtitle}}">: {{item.volumeInfo.subtitle | getTruncatedSubtitle}}</template>
+              </a>
+            </h1>
+            <div class="item-info">{{item.volumeInfo.authors}} <template if="{{item.volumeInfo.publishedDate}}">- {{item.volumeInfo.publishedDate | getPubDateYear}}</template></div>
+            <div class="item-details">
+              <template if="{{item.volumeInfo.imageLinks.smallThumbnail}}">
+                <div class="item-cover">
+                  <a href="{{item.volumeInfo.previewLink}}" target="_blank">
+                    <img _src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="{{item.volumeInfo.title}}" height="80" />
+                  </a>
+                </div>
+              </template>
+              <template if="{{item.searchInfo}}">
+                <div class="item-snippet">
+                  <template is="juicy-html" content="{{item.searchInfo.textSnippet  | getTruncatedSnippet}}"></template>
+                </div>
+              </template>
+            </div>
+          </article>
+        </li>
+      </template>
+    </ul>
+  </template>
+  <script>
+    Polymer('google-books-search', {
+      /**
+       * The search query.
+       *
+       * @property query
+       * @type string
+       * @default ''
+       */
+      query: '',
+
+      /**
+       * The maximum number of results to retrieve.
+       *
+       * @property maxResults
+       * @type integer
+       * @default 5
+       */
+      maxResults: 5,
+
+      /**
+       * Value to order the search results by.
+       *
+       * Should be one of: 'relevance', 'newest'
+       *
+       * @property orderBy
+       * @type string
+       * @default 'relevance'
+       */
+      orderBy: 'relevance',
+
+      /**
+       * The maximum characters the subtitle should have.
+       *
+       * @property subtitleMaxLength
+       * @type integer
+       * @default 75
+       */
+      subtitleMaxLength: 75,
+
+      /**
+       * The maximum characters the text snippet should have.
+       *
+       * @property snippetMaxLength
+       * @type integer
+       * @default 250
+       */
+      snippetMaxLength: 250,
+
+      /**
+       * The array of items
+       *
+       * @attribute items
+       * @type array
+       * @default []
+       */
+      items: [],
+
+      ready: function () {
+        this.initialize();
+      },
+
+      initialize: function() {
+        if (this.query) {
+          this.$.coreajax.go();
+        }
+      },
+
+      handleChange: function() {
+        this.query = this.committedValue;
+
+        this.$.coreajax.go();
+      },
+
+      handleResponse: function(event) {
+        var items = event.detail.response.items
+        this.$.items.model = {
+          items: items
+        };
+
+        this.fire('google-books-search-success', {items: items});
+      },
+
+      handleError: function(event) {
+        var xhr = event.detail.xhr,
+            response = JSON.parse(xhr.response);
+
+        console.log('Error: ' + xhr.status + ' - ' + response.error.message);
+        this.fire('google-books-search-error', {error: response.error});
+      },
+
+      getTruncatedString: function(string, length) {
+        return string.length > length ? string.substr(0, length) + '...' : string;
+      },
+
+      getTruncatedSubtitle: function(subtitle) {
+        return this.getTruncatedString(subtitle, this.subtitleMaxLength);
+      },
+
+      getTruncatedSnippet: function(snippet) {
+        return this.getTruncatedString(snippet, this.snippetMaxLength);
+      },
+
+      getPubDateYear: function(date) {
+        return date.length > 4 ? date.split('-')[0] : date;
+      }
+    });
+  </script>
+</polymer-element>

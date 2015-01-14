@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>google-books-search</title>
+  <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+  <link rel="import" href="../src/google-books-search.html">
+</head>
+<body>
+  <google-books-search
+    id="google-books-search"
+    maxResults="3"
+    query="css3"
+    orderBy="newest"
+    subtitleMaxLength="10"
+    snippetMaxLength="15">
+  </google-books-search>
+  <script>
+    var googleBooksSearch = document.querySelector('#google-books-search');
+
+    suite('<google-books-search>', function() {
+      test('specified properties have the correct values', function () {
+        assert.equal(googleBooksSearch.maxResults, '3');
+        assert.equal(googleBooksSearch.query, 'css3');
+        assert.equal(googleBooksSearch.orderBy, 'newest');
+        assert.equal(googleBooksSearch.subtitleMaxLength, '10');
+        assert.equal(googleBooksSearch.snippetMaxLength, '15');
+      });
+
+      test('fires google-books-search-success event', function(done) {
+        googleBooksSearch.addEventListener('google-books-search-success', function(event) {
+          event.target.removeEventListener(event.type, arguments.callee);
+          assert.isDefined(event.detail);
+          assert.isNotNull(event.detail);
+          assert.isDefined(event.detail.items);
+          assert.isNotNull(event.detail.items);
+          done();
+        });
+        googleBooksSearch.handleResponse({"detail": {"response": {"items": {}}}});
+      });
+
+      test('fires google-books-search-error event', function(done) {
+        googleBooksSearch.addEventListener('google-books-search-error', function(event) {
+          event.target.removeEventListener(event.type, arguments.callee);
+          assert.isDefined(event.detail);
+          assert.isNotNull(event.detail);
+          assert.isDefined(event.detail.error);
+          assert.isNotNull(event.detail.error);
+          done();
+        });
+        googleBooksSearch.handleError({"detail": {"xhr": {"status": 400, "response": "{\"error\": {\"message\": \"Error\"}}"}}});
+      });
+
+      suite('truncation of subtitle', function() {
+        test('truncates subtitle correctly when it is longer than subtitleMaxLength', function() {
+          assert.equal(googleBooksSearch.getTruncatedSubtitle('This is a test subtitle'), 'This is a ...');
+        });
+
+        test('does not truncate subtitle when it is shorter than the subtitleMaxLength', function() {
+          assert.equal(googleBooksSearch.getTruncatedSubtitle('Subtitle'), 'Subtitle');
+        });
+      });
+
+      suite('truncation of snippet', function() {
+        test('truncates snippet correctly when it is longer than subtitleMaxLength', function() {
+          assert.equal(googleBooksSearch.getTruncatedSnippet('This is a test snippet'), 'This is a test ...');
+        });
+
+        test('doesn not truncate snippet when it is shorter than the snippetMaxLength', function() {
+          assert.equal(googleBooksSearch.getTruncatedSnippet('Snippet'), 'Snippet');
+        });
+      });
+
+      test('extracts the year of the publication date correctly', function() {
+        assert.equal(googleBooksSearch.getPubDateYear('2014-01-01'), '2014');
+        assert.equal(googleBooksSearch.getPubDateYear('2013-01'), '2013');
+        assert.equal(googleBooksSearch.getPubDateYear('2012'), '2012');
+      });
+    });
+  </script>
+</body>
+</html>
