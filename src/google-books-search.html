@@ -193,9 +193,10 @@
       },
 
       handleChange: function() {
-        this.query = this.committedValue;
-
-        this.$.coreajax.go();
+        if (this.value !== '') {
+          this.query = this.committedValue;
+          this.$.coreajax.go();
+        }
       },
 
       handleResponse: function(event) {
