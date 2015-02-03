@@ -1,0 +1,48 @@
+{
+  "name": "google-books-search",
+  "version": "0.1.0",
+  "author": "Oliver Schmidt",
+  "description": "A reactive custom element for searching Google Books",
+  "license": "MIT",
+  "main": "dist/build/build.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codejet/google-books-search/tree/reactive-element"
+  },
+  "keywords": [
+    "web-component",
+    "web-components",
+    "custom-element",
+    "custom-elements",
+    "react",
+    "reactive-elements",
+    "google-books"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  },
+  "dependencies": {
+    "document-register-element": "^0.1.6",
+    "reactive-elements": "^0.4.9",
+    "react": "^0.13.0-beta.2",
+    "qwest": "^1.5.4"
+  },
+  "devDependencies": {
+    "browserify": "^8.1.1",
+    "gulp": "^3.8.11",
+    "gulp-html-replace": "^1.4.4",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.1.0",
+    "jest-cli": "^0.3.0",
+    "react-tools": "^0.13.0-beta.2",
+    "reactify": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.3.0"
+  }
+}
