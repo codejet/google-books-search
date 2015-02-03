@@ -73,10 +73,18 @@
         });
       });
 
-      test('extracts the year of the publication date correctly', function() {
-        assert.equal(googleBooksSearch.getPubDateYear('2014-01-01'), '2014');
-        assert.equal(googleBooksSearch.getPubDateYear('2013-01'), '2013');
-        assert.equal(googleBooksSearch.getPubDateYear('2012'), '2012');
+      suite('extraction of the year from the given publication date', function() {
+        test('extracts the year correctly when a date in the format of yyyy-mm-dd is given', function() {
+          assert.equal(googleBooksSearch.getPubDateYear('2014-01-01'), '2014');
+        });
+
+        test('extracts the year correctly when a date in the format of yyyy-mm is given', function() {
+          assert.equal(googleBooksSearch.getPubDateYear('2013-01'), '2013');
+        });
+
+        test('takes the year when a date in the format of yyyy is given', function() {
+          assert.equal(googleBooksSearch.getPubDateYear('2012'), '2012');
+        });
       });
     });
   </script>
