@@ -78,8 +78,8 @@ Attribute     | Options              | Default      | Description
 `query`       | *string*             | ``           | The text to query for.
 `maxResults`  | *integer*             | 5            | The max number of results to return.
 `orderBy`     | *relevance, newest*  | `relevance`  | The parameter to order the results by.
-`maxSubtitleLength`     | *integer* | 75  | The max number of characters of the subtitle to be displayed.
-`maxSnippetLength`     | *integer*  | 250  | The max number of characters of the text snippets to be displayed.
+`subtitleMaxLength`     | *integer* | 75  | The max number of characters of the subtitle to be displayed.
+`snippetMaxLength`     | *integer*  | 250  | The max number of characters of the text snippets to be displayed.
 
 ## Events
 
