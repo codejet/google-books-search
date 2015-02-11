@@ -53,6 +53,16 @@
         googleBooksSearch.handleError({"detail": {"xhr": {"status": 400, "response": "{\"error\": {\"message\": \"Error\"}}"}}});
       });
 
+      suite('formatting of authors list', function() {
+        test('returns a single author', function() {
+          assert.equal(googleBooksSearch.getFormattedAuthorsList(['Only Author']), 'Only Author');
+        });
+
+        test('joins a list of authors correctly', function() {
+          assert.equal(googleBooksSearch.getFormattedAuthorsList(['First Author', 'Second Author', 'Third Author']), 'First Author, Second Author, Third Author');
+        });
+      });
+
       suite('truncation of subtitle', function() {
         test('truncates subtitle correctly when it is longer than subtitleMaxLength', function() {
           assert.equal(googleBooksSearch.getTruncatedSubtitle('This is a test subtitle'), 'This is a ...');
