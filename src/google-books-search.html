@@ -104,7 +104,7 @@
                 {{item.volumeInfo.title}}<template if="{{item.volumeInfo.subtitle}}">: {{item.volumeInfo.subtitle | getTruncatedSubtitle}}</template>
               </a>
             </h1>
-            <div class="item-info">{{item.volumeInfo.authors}} <template if="{{item.volumeInfo.publishedDate}}">- {{item.volumeInfo.publishedDate | getPubDateYear}}</template></div>
+            <div class="item-info">{{item.volumeInfo.authors | getFormattedAuthorsList}} <template if="{{item.volumeInfo.publishedDate}}">- {{item.volumeInfo.publishedDate | getPubDateYear}}</template></div>
             <div class="item-details">
               <template if="{{item.volumeInfo.imageLinks.smallThumbnail}}">
                 <div class="item-cover">
@@ -214,6 +214,10 @@
 
         console.log('Error: ' + xhr.status + ' - ' + response.error.message);
         this.fire('google-books-search-error', {error: response.error});
+      },
+
+      getFormattedAuthorsList: function(authors) {
+        return authors.join(', ');
       },
 
       getTruncatedString: function(string, length) {
