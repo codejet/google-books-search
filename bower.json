@@ -19,13 +19,13 @@
     "bower_components"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.5.2",
-    "core-ajax": "Polymer/core-ajax#~0.5.2",
-    "core-input": "Polymer/core-input#~0.5.2",
-    "core-icon-button": "Polymer/core-icon-button#~0.5.2",
+    "polymer": "Polymer/polymer#~0.5.4",
+    "core-ajax": "Polymer/core-ajax#~0.5.5",
+    "core-input": "Polymer/core-input#~0.5.5",
+    "core-icon-button": "Polymer/core-icon-button#~0.5.5",
     "juicy-html": "Juicy/juicy-html#~0.0.2"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#~v2.0.5"
+    "web-component-tester": "Polymer/web-component-tester#~v2.2.3"
   }
 }
