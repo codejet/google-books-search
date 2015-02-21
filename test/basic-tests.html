@@ -55,31 +55,31 @@
 
       suite('formatting of authors list', function() {
         test('returns a single author', function() {
-          assert.equal(googleBooksSearch.getFormattedAuthorsList(['Only Author']), 'Only Author');
+          assert.equal(googleBooksSearch.formatAuthorsList(['Only Author']), 'Only Author');
         });
 
         test('joins a list of authors correctly', function() {
-          assert.equal(googleBooksSearch.getFormattedAuthorsList(['First Author', 'Second Author', 'Third Author']), 'First Author, Second Author, Third Author');
+          assert.equal(googleBooksSearch.formatAuthorsList(['First Author', 'Second Author', 'Third Author']), 'First Author, Second Author, Third Author');
         });
       });
 
       suite('truncation of subtitle', function() {
         test('truncates subtitle correctly when it is longer than subtitleMaxLength', function() {
-          assert.equal(googleBooksSearch.getTruncatedSubtitle('This is a test subtitle'), 'This is a ...');
+          assert.equal(googleBooksSearch.truncateSubtitle('This is a test subtitle'), 'This is a ...');
         });
 
         test('does not truncate subtitle when it is shorter than the subtitleMaxLength', function() {
-          assert.equal(googleBooksSearch.getTruncatedSubtitle('Subtitle'), 'Subtitle');
+          assert.equal(googleBooksSearch.truncateSubtitle('Subtitle'), 'Subtitle');
         });
       });
 
       suite('truncation of snippet', function() {
         test('truncates snippet correctly when it is longer than subtitleMaxLength', function() {
-          assert.equal(googleBooksSearch.getTruncatedSnippet('This is a test snippet'), 'This is a test ...');
+          assert.equal(googleBooksSearch.truncateSnippet('This is a test snippet'), 'This is a test ...');
         });
 
         test('doesn not truncate snippet when it is shorter than the snippetMaxLength', function() {
-          assert.equal(googleBooksSearch.getTruncatedSnippet('Snippet'), 'Snippet');
+          assert.equal(googleBooksSearch.truncateSnippet('Snippet'), 'Snippet');
         });
       });
 

@@ -101,10 +101,10 @@
           <article>
             <h1 class="item-title">
               <a class="item-preview-link" href="{{item.volumeInfo.previewLink}}" target="_blank">
-                {{item.volumeInfo.title}}<template if="{{item.volumeInfo.subtitle}}">: {{item.volumeInfo.subtitle | getTruncatedSubtitle}}</template>
+                {{item.volumeInfo.title}}<template if="{{item.volumeInfo.subtitle}}">: {{item.volumeInfo.subtitle | truncateSubtitle}}</template>
               </a>
             </h1>
-            <div class="item-info">{{item.volumeInfo.authors | getFormattedAuthorsList}} <template if="{{item.volumeInfo.publishedDate}}">- {{item.volumeInfo.publishedDate | getPubDateYear}}</template></div>
+            <div class="item-info">{{item.volumeInfo.authors | formatAuthorsList}} <template if="{{item.volumeInfo.publishedDate}}">- {{item.volumeInfo.publishedDate | getPubDateYear}}</template></div>
             <div class="item-details">
               <template if="{{item.volumeInfo.imageLinks.smallThumbnail}}">
                 <div class="item-cover">
@@ -115,7 +115,7 @@
               </template>
               <template if="{{item.searchInfo}}">
                 <div class="item-snippet">
-                  <template is="juicy-html" content="{{item.searchInfo.textSnippet  | getTruncatedSnippet}}"></template>
+                  <template is="juicy-html" content="{{item.searchInfo.textSnippet  | truncateSnippet}}"></template>
                 </div>
               </template>
             </div>
@@ -216,20 +216,20 @@
         this.fire('google-books-search-error', {error: response.error});
       },
 
-      getFormattedAuthorsList: function(authors) {
+      formatAuthorsList: function(authors) {
         return authors.join(', ');
       },
 
-      getTruncatedString: function(string, length) {
+      truncateString: function(string, length) {
         return string.length > length ? string.substr(0, length) + '...' : string;
       },
 
-      getTruncatedSubtitle: function(subtitle) {
-        return this.getTruncatedString(subtitle, this.subtitleMaxLength);
+      truncateSubtitle: function(subtitle) {
+        return this.truncateString(subtitle, this.subtitleMaxLength);
       },
 
-      getTruncatedSnippet: function(snippet) {
-        return this.getTruncatedString(snippet, this.snippetMaxLength);
+      truncateSnippet: function(snippet) {
+        return this.truncateString(snippet, this.snippetMaxLength);
       },
 
       getPubDateYear: function(date) {
