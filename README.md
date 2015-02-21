@@ -20,6 +20,10 @@ For better performance I only request the fields from Google Books that are actu
 
 Hat tip to [paranoida](https://github.com/paranoida/) for pointing out ```::-webkit-search-decoration``` to me.
 
+## Reactive Element
+
+I also created a "reactive version" of this element using [React](http://facebook.github.io/react/) and [ReactiveElements](https://github.com/PixelsCommander/ReactiveElements). You can find it in the [reactive-element branch](https://github.com/codejet/google-books-search/tree/reactive-element).
+
 ## Install
 
 1. Clone the repository
