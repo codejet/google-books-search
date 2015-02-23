@@ -1,4 +1,4 @@
-jest.dontMock('../src/js/items.jsx');
+jest.dontMock('../src/js/items/main.jsx');
 
 describe('Items', function() {
   var data = [
@@ -39,7 +39,7 @@ describe('Items', function() {
   ];
   var React = require('react/addons');
   var TestUtils = React.addons.TestUtils;
-  var Items = require('../src/js/items.jsx');
+  var Items = require('../src/js/items/main.jsx');
   var items = TestUtils.renderIntoDocument(
     <Items subtitleMaxLength={10} snippetMaxLength={15} data={data} />
   );

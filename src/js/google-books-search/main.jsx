@@ -1,11 +1,21 @@
 var React = require('react');
 var qwest = require('qwest');
 
-var SearchField = require('./search-field.jsx');
-var Items = require('./items.jsx');
-var Styles = require('../styles/google-books-search.js');
+var SearchField = require('../search-field/main.jsx');
+var Items = require('../items/main.jsx');
+var Styles = require('./styles.js');
 
 class GoogleBooksSearch extends React.Component {
+  getDefaultProps() {
+    return {
+      query: '',
+      maxResults: '5',
+      orderBy: 'relevance',
+      subtitleMaxLength: '75',
+      snippetMaxLength: '250'
+    }
+  }
+
   constructor() {
     this.state = {data: []};
   }
@@ -46,13 +56,5 @@ class GoogleBooksSearch extends React.Component {
     );
   }
 }
-
-GoogleBooksSearch.defaultProps = {
-  query: '',
-  maxResults: '5',
-  orderBy: 'relevance',
-  subtitleMaxLength: '75',
-  snippetMaxLength: '250'
-};
 
 module.exports = GoogleBooksSearch;

@@ -1,5 +1,5 @@
 var React = require('react');
-var Styles = require('../styles/items.js');
+var Styles = require('./styles.js');
 
 class Items extends React.Component {
   formatAuthorsList(authors) {
