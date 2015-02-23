@@ -6,16 +6,6 @@ var Items = require('../items/main.jsx');
 var Styles = require('./styles.js');
 
 class GoogleBooksSearch extends React.Component {
-  getDefaultProps() {
-    return {
-      query: '',
-      maxResults: '5',
-      orderBy: 'relevance',
-      subtitleMaxLength: '75',
-      snippetMaxLength: '250'
-    }
-  }
-
   constructor() {
     this.state = {data: []};
   }
@@ -55,6 +45,14 @@ class GoogleBooksSearch extends React.Component {
       </div>
     );
   }
+}
+
+GoogleBooksSearch.defaultProps = {
+  query: '',
+  maxResults: '5',
+  orderBy: 'relevance',
+  subtitleMaxLength: '75',
+  snippetMaxLength: '250'
 }
 
 module.exports = GoogleBooksSearch;
