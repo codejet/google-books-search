@@ -1,7 +1,11 @@
 {
   "name": "google-books-search",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Oliver Schmidt",
+  "contributors": [{
+    "name": "Rafal Bromirski",
+    "url": "https://github.com/paranoida"
+  }],
   "description": "A reactive custom element for searching Google Books",
   "license": "MIT",
   "main": "dist/build/build.min.js",
