@@ -1,9 +1,9 @@
-jest.dontMock('../src/js/search-field.jsx');
+jest.dontMock('../src/js/search-field/main.jsx');
 
 describe('SearchField', function() {
   var React = require('react/addons');
   var TestUtils = React.addons.TestUtils;
-  var SearchField = require('../src/js/search-field.jsx');
+  var SearchField = require('../src/js/search-field/main.jsx');
   var onUserActionCallback, searchField, input;
 
   beforeEach(function() {

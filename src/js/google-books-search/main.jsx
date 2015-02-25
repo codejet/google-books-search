@@ -1,9 +1,9 @@
 var React = require('react');
 var qwest = require('qwest');
 
-var SearchField = require('./search-field.jsx');
-var Items = require('./items.jsx');
-var Styles = require('../styles/google-books-search.js');
+var SearchField = require('../search-field/main.jsx');
+var Items = require('../items/main.jsx');
+var Styles = require('./styles.js');
 
 class GoogleBooksSearch extends React.Component {
   constructor() {
@@ -53,6 +53,6 @@ GoogleBooksSearch.defaultProps = {
   orderBy: 'relevance',
   subtitleMaxLength: '75',
   snippetMaxLength: '250'
-};
+}
 
 module.exports = GoogleBooksSearch;

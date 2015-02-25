@@ -1,5 +1,5 @@
 var React = require('react');
-var Styles = require('../styles/search-field.js');
+var Styles = require('./styles.js');
 
 class SearchField extends React.Component {
   handleUserAction() {
