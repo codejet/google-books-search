@@ -34,8 +34,8 @@
   "dependencies": {
     "document-register-element": "^0.1.6",
     "reactive-elements": "^0.4.9",
-    "react": "^0.13.0-beta.2",
-    "qwest": "^1.5.4"
+    "react": "^0.13.0",
+    "qwest": "^1.5.9"
   },
   "devDependencies": {
     "browserify": "^8.1.1",
@@ -43,8 +43,8 @@
     "gulp-html-replace": "^1.4.4",
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^1.1.0",
-    "jest-cli": "^0.3.0",
-    "react-tools": "^0.13.0-beta.2",
+    "jest-cli": "^0.4.0",
+    "react-tools": "^0.13.0",
     "reactify": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.3.0"
