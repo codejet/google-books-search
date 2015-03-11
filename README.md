@@ -1,6 +1,6 @@
 # &lt;google-books-search&gt;
 
-A reactive custom element for searching Google Books. 
+A reactive custom element for searching Google Books.
 
 It's a port of my Polymer element (in the [master branch](https://github.com/codejet/google-books-search)) to React.
 
@@ -74,18 +74,16 @@ I'm using [Jest](https://facebook.github.io/jest/) for testing.
 To run the whole test suite:
 
 ```
-$ npm test    
+$ npm test
 ```
 
 You can also run single tests:
 
 ```
-$ npm test <filename of test (i.e. items etc.)>        
+$ npm test <filename of test (i.e. items etc.)>
 ```
 
 This might cause an error if you're using nvm though. In that case you have to run the full suite for now.
-
-Currently Jest will give some warnings about the `getDOMNode` method, which is related to the usage of the beta versions of React and React Tools.
 
 ## Options
 
