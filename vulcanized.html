@@ -1964,7 +1964,11 @@ core-icon {
                 {{item.volumeInfo.title}}<template if="{{item.volumeInfo.subtitle}}">: {{item.volumeInfo.subtitle | truncateSubtitle}}</template>
               </a>
             </h1>
-            <div class="item-info">{{item.volumeInfo.authors | formatAuthorsList}} <template if="{{item.volumeInfo.publishedDate}}">- {{item.volumeInfo.publishedDate | getPubDateYear}}</template></div>
+            <div class="item-info">
+              <template if="{{item.volumeInfo.authors}}">{{item.volumeInfo.authors | formatAuthorsList}}</template>
+              <template if="{{item.volumeInfo.authors &amp;&amp; item.volumeInfo.publishedDate}}"> - </template>
+              <template if="{{item.volumeInfo.publishedDate}}">{{item.volumeInfo.publishedDate | getPubDateYear}}</template>
+            </div>
             <div class="item-details">
               <template if="{{item.volumeInfo.imageLinks.smallThumbnail}}">
                 <div class="item-cover">
