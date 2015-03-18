@@ -32,7 +32,11 @@ class Items extends React.Component {
                 {item.volumeInfo.title}{item.volumeInfo.subtitle ? ': ' + this.truncateSubtitle(item.volumeInfo.subtitle) : ''}
               </a>
             </h1>
-            <div style={Styles.item.info}>{this.formatAuthorsList(item.volumeInfo.authors)} {item.volumeInfo.publishedDate ? ' - ' + this.extractPubDateYear(item.volumeInfo.publishedDate) : ''}</div>
+            <div style={Styles.item.info}>
+              {item.volumeInfo.authors ? this.formatAuthorsList(item.volumeInfo.authors) : ''}
+              {item.volumeInfo.authors && item.volumeInfo.publishedDate ? ' - ' : ''}
+              {item.volumeInfo.publishedDate ? this.extractPubDateYear(item.volumeInfo.publishedDate) : ''}
+            </div>
             <div style={Styles.item.details}>
               <div style={Styles.item.cover}>
                 <a href={item.volumeInfo.previewLink} target="_blank">
