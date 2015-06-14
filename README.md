@@ -19,8 +19,6 @@ Besides that I decided to go with [document-register-element](https://github.com
 
 The React components are written in CommonJS format and made available in the browser using [Browserify](http://browserify.org/).
 
-I'm currently using the 0.13.0-beta.2 of React and React Tools which provide support for ES6 classes.
-
 If you wonder about the styles being written in JavaScript, check [this presentation](https://speakerdeck.com/vjeux/react-css-in-js) by [vjeux](https://github.com/vjeux) of Facebook for a broader discussion of the topic. I mainly used this approach here because it provides scoped styles, just like the shadow DOM does for the Polymer element.
 
 ## Install

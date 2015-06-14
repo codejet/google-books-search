@@ -7,6 +7,7 @@ var Styles = require('./styles.js');
 
 class GoogleBooksSearch extends React.Component {
   constructor() {
+    super()
     this.state = {data: []};
   }
 
@@ -29,7 +30,7 @@ class GoogleBooksSearch extends React.Component {
       .then(response => {
         this.setState({
           query: query,
-          data: JSON.parse(response).items
+          data: response.items
         });
       })
       .catch(message => {
