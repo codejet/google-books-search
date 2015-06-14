@@ -1,125 +1,129 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/core-input/core-input.html">
-<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
-<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
-<link rel="import" href="../bower_components/juicy-html/juicy-html.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 
-<polymer-element name="google-books-search" attributes="query maxResults orderBy subtitleMaxLength snippetMaxLength">
+<dom-module id="google-books-search">
+  <style>
+    :host {
+      font-family: sans-serif;
+    }
+    paper-icon-button {
+      margin: 0;
+      padding: 0;
+    }
+    paper-icon-button::shadow #ink {
+      opacity: 0;
+    }
+    .search-wrapper {
+      border: 1px solid gray;
+      display: inline-block;
+      margin: 0;
+      padding: 0 5px;
+    }
+    .search-label {
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+    .search {
+      -webkit-appearance: none;
+      vertical-align: middle;
+      /* fomrer core-input styles */
+      width: 20em;
+      font: inherit;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      border: 0;
+      outline: none;
+    }
+    .search::-webkit-search-decoration {
+      display: none;
+    }
+    .items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .item-preview-link {
+      text-decoration: none;
+    }
+    .item-preview-link:hover {
+      text-decoration: underline;
+    }
+    .item-title {
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    .item-info {
+      font-size: 14px;
+      margin-bottom: 1em;
+    }
+    .item-details:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .item-cover {
+      float: left;
+      margin-right: .5em;
+    }
+    .item-snippet {
+      font-size: 14px;
+      overflow: hidden;
+    }
+  </style>
   <template>
-    <style>
-      :host {
-        font-family: sans-serif;
-      }
-      core-icon-button {
-        margin: 0;
-        padding: 0;
-      }
-      core-icon-button:hover:not([disabled]),
-      core-icon-button:active:not([disabled]) {
-        background-color: transparent;
-        box-shadow: none;
-      }
-      .search-wrapper {
-        border: 1px solid gray;
-        display: inline-block;
-        margin: 0;
-        padding: 0 5px;
-      }
-      .search-label {
-        position: absolute;
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-        clip: rect(1px, 1px, 1px, 1px);
-      }
-      .search {
-        -webkit-appearance: none;
-        vertical-align: middle;
-      }
-      .search::-webkit-search-decoration {
-        display: none;
-      }
-      .items {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .item-preview-link {
-        text-decoration: none;
-      }
-      .item-preview-link:hover {
-        text-decoration: underline;
-      }
-      .item-title {
-        font-size: 18px;
-        margin-bottom: 0;
-      }
-      .item-info {
-        font-size: 14px;
-        margin-bottom: 1em;
-      }
-      .item-details:after {
-        content: '';
-        display: block;
-        clear: both;
-      }
-      .item-cover {
-        float: left;
-        margin-right: .5em;
-      }
-      .item-snippet {
-        font-size: 14px;
-        overflow: hidden;
-      }
-    </style>
-    <core-ajax
-      id="coreajax"
+    <iron-ajax
+      id="ironajax"
       url="https://www.googleapis.com/books/v1/volumes"
-      params='{"q": "{{query}}", "maxResults": "{{maxResults}}", "orderBy": "{{orderBy}}", "fields": "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"}'
-      handleAs="json"
-      on-core-response="{{handleResponse}}"
-      on-core-error="{{handleError}}">
-    </core-ajax>
+      params="{{ajaxParams}}"
+      handle-as="json"
+      on-response="handleResponse"
+      on-error="handleError">
+    </iron-ajax>
     <div class="search-wrapper">
       <label class="search-label" for="search">Search Terms</label>
       <input
-        is="core-input"
+        is="iron-input"
         id="search"
         class="search"
         autocomplete="off"
         type="search"
-        on-change="{{handleChange}}"
-        on-error="{{handleError}}"
+        on-change="handleChange"
         placeholder="Enter searchterm here"
-        value="{{value}}"
-        committedValue="{{committedValue}}" />
-      <core-icon-button icon="search"></core-icon-button>
+        value="{{value::input}}" />
+      <paper-icon-button icon="search"></paper-icon-button>
     </div>
     <ul class="items">
-      <template id="items" repeat="{{item in items}}">
+      <template is="dom-repeat" items="{{items}}">
         <li>
           <article>
             <h1 class="item-title">
               <a class="item-preview-link" href="{{item.volumeInfo.previewLink}}" target="_blank">
-                {{item.volumeInfo.title}}<template if="{{item.volumeInfo.subtitle}}">: {{item.volumeInfo.subtitle | truncateSubtitle}}</template>
+                <span>{{item.volumeInfo.title}}</span><template is="dom-if" if="{{item.volumeInfo.subtitle}}" restamp="true">: <span>{{truncateSubtitle(item.volumeInfo.subtitle)}}</span></template>
               </a>
             </h1>
             <div class="item-info">
-              <template if="{{item.volumeInfo.authors}}">{{item.volumeInfo.authors | formatAuthorsList}}</template>
-              <template if="{{item.volumeInfo.authors && item.volumeInfo.publishedDate}}"> - </template>
-              <template if="{{item.volumeInfo.publishedDate}}">{{item.volumeInfo.publishedDate | getPubDateYear}}</template>
+              <template is="dom-if" if="{{item.volumeInfo.authors}}" restamp="true"><span>{{formatAuthorsList(item.volumeInfo.authors)}}</span></template>
+              <template is="dom-if" if="{{item.volumeInfo.authors && item.volumeInfo.publishedDate}}"> - </template>
+              <template is="dom-if" if="{{item.volumeInfo.publishedDate}}" restamp="true"><span>{{getPubDateYear(item.volumeInfo.publishedDate)}}</span></template>
             </div>
             <div class="item-details">
-              <template if="{{item.volumeInfo.imageLinks.smallThumbnail}}">
+              <template is="dom-if" if="{{item.volumeInfo.imageLinks.smallThumbnail}}" restamp="true">
                 <div class="item-cover">
                   <a href="{{item.volumeInfo.previewLink}}" target="_blank">
-                    <img _src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="{{item.volumeInfo.title}}" height="80" />
+                    <img src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="{{item.volumeInfo.title}}" height="80" />
                   </a>
                 </div>
               </template>
-              <template if="{{item.searchInfo}}">
+              <template is="dom-if" if="{{item.searchInfo.textSnippet}}" restamp="true">
                 <div class="item-snippet">
-                  <template is="juicy-html" content="{{item.searchInfo.textSnippet  | truncateSnippet}}"></template>
+                  <div id="snippet" inner-h-t-m-l="{{truncateSnippet(item.searchInfo.textSnippet)}}"></div>
                 </div>
               </template>
             </div>
@@ -128,117 +132,100 @@
       </template>
     </ul>
   </template>
-  <script>
-    Polymer('google-books-search', {
-      /**
-       * The search query.
-       *
-       * @property query
-       * @type string
-       * @default ''
-       */
-      query: '',
-
-      /**
-       * The maximum number of results to retrieve.
-       *
-       * @property maxResults
-       * @type integer
-       * @default 5
-       */
-      maxResults: 5,
-
-      /**
-       * Value to order the search results by.
-       *
-       * Should be one of: 'relevance', 'newest'
-       *
-       * @property orderBy
-       * @type string
-       * @default 'relevance'
-       */
-      orderBy: 'relevance',
-
-      /**
-       * The maximum characters the subtitle should have.
-       *
-       * @property subtitleMaxLength
-       * @type integer
-       * @default 75
-       */
-      subtitleMaxLength: 75,
-
-      /**
-       * The maximum characters the text snippet should have.
-       *
-       * @property snippetMaxLength
-       * @type integer
-       * @default 250
-       */
-      snippetMaxLength: 250,
-
-      /**
-       * The array of items
-       *
-       * @attribute items
-       * @type array
-       * @default []
-       */
-      items: [],
-
-      ready: function () {
-        this.initialize();
+</dom-module>
+<script>
+  Polymer({
+    is: 'google-books-search',
+    properties: {
+      query: {
+        type: String,
+        value: ''
       },
-
-      initialize: function() {
-        if (this.query) {
-          this.$.coreajax.go();
-        }
+      maxResults: {
+        type: Number,
+        value: 5
       },
-
-      handleChange: function() {
-        if (this.value !== '') {
-          this.query = this.committedValue;
-          this.$.coreajax.go();
-        }
+      orderBy: {
+        type: String,
+        value: 'relevance'
       },
-
-      handleResponse: function(event) {
-        var items = event.detail.response.items
-        this.$.items.model = {
-          items: items
-        };
-
-        this.fire('google-books-search-success', {items: items});
+      subtitleMaxLength: {
+        type: Number,
+        value: 75
       },
-
-      handleError: function(event) {
-        var xhr = event.detail.xhr,
-            response = JSON.parse(xhr.response);
-
-        console.log('Error: ' + xhr.status + ' - ' + response.error.message);
-        this.fire('google-books-search-error', {error: response.error});
+      snippetMaxLength: {
+        type: Number,
+        value: 250
       },
-
-      formatAuthorsList: function(authors) {
-        return authors.join(', ');
+      items: {
+        type: Array,
+        value: []
       },
-
-      truncateString: function(string, length) {
-        return string.length > length ? string.substr(0, length) + '...' : string;
-      },
-
-      truncateSubtitle: function(subtitle) {
-        return this.truncateString(subtitle, this.subtitleMaxLength);
-      },
-
-      truncateSnippet: function(snippet) {
-        return this.truncateString(snippet, this.snippetMaxLength);
-      },
-
-      getPubDateYear: function(date) {
-        return date.length > 4 ? date.split('-')[0] : date;
+      ajaxParams: {
+        type: String,
+        computed: 'processParams(query, maxResults, orderBy)'
       }
-    });
-  </script>
-</polymer-element>
+    },
+
+    processParams: function(query, maxResults, orderBy) {
+      return {
+        q: query,
+        maxResults: maxResults,
+        orderBy: orderBy,
+        fields: "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"
+      };
+    },
+
+    ready: function () {
+      this.initialize();
+    },
+
+    initialize: function() {
+      if (this.query) {
+        this.$.ironajax.generateRequest();
+      }
+    },
+
+    handleChange: function() {
+      if (this.value !== '') {
+        this.items = []; //temporary workaround due to https://github.com/Polymer/polymer/issues/1742
+        this.query = this.value;
+        this.$.ironajax.generateRequest();
+      }
+    },
+
+    handleResponse: function(event) {
+      this.items = event.detail.response.items;
+
+      this.fire('google-books-search-success', {items: this.items});
+    },
+
+    handleError: function(event) {
+      var xhr = event.detail.xhr,
+          response = JSON.parse(xhr.response);
+
+      console.log('Error: ' + xhr.status + ' - ' + response.error.message);
+      this.fire('google-books-search-error', {error: response.error});
+    },
+
+    formatAuthorsList: function(authors) {
+      return authors.join(', ');
+    },
+
+    truncateString: function(string, length) {
+      return string.length > length ? string.substr(0, length) + '...' : string;
+    },
+
+    truncateSubtitle: function(subtitle) {
+      return this.truncateString(subtitle, this.subtitleMaxLength);
+    },
+
+    truncateSnippet: function(snippet) {
+      return this.truncateString(snippet, this.snippetMaxLength);
+    },
+
+    getPubDateYear: function(date) {
+      return date.length > 4 ? date.split('-')[0] : date;
+    }
+  });
+</script>

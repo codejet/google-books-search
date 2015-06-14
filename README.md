@@ -14,8 +14,6 @@ Alternatively you can follow [this link](http://codejet.github.io/google-books-s
 
 At least for now this is a pretty simple element with minimal styling.
 
-Apart from what Polymer provides, I also use the [juicy-html](https://github.com/Juicy/juicy-html) element to correctly display text snippets that contain HTML (see [this discussion](https://github.com/Polymer/TemplateBinding/issues/57) for example).
-
 For better performance I only request the fields from Google Books that are actually being displayed in the results. What's being returned is thus called a "[partial response](https://developers.google.com/site-verification/v1/performance#partial-response)".
 
 Hat tip to [paranoida](https://github.com/paranoida/) for pointing out ```::-webkit-search-decoration``` to me.

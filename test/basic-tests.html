@@ -11,11 +11,11 @@
 <body>
   <google-books-search
     id="google-books-search"
-    maxResults="3"
+    max-results="3"
     query="css3"
-    orderBy="newest"
-    subtitleMaxLength="10"
-    snippetMaxLength="15">
+    order-by="newest"
+    subtitle-max-length="10"
+    snippet-max-length="15">
   </google-books-search>
   <script>
     var googleBooksSearch = document.querySelector('#google-books-search');
@@ -29,6 +29,17 @@
         assert.equal(googleBooksSearch.snippetMaxLength, '15');
       });
 
+      test('processes the params for the ajax request correctly', function() {
+        var paramsObject = {
+          q: 'test query',
+          maxResults: 3,
+          orderBy: 'newest',
+          fields: "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"
+        };
+
+        assert.deepEqual(googleBooksSearch.processParams('test query', googleBooksSearch.maxResults, googleBooksSearch.orderBy), paramsObject);
+      });
+
       test('fires google-books-search-success event', function(done) {
         googleBooksSearch.addEventListener('google-books-search-success', function(event) {
           event.target.removeEventListener(event.type, arguments.callee);
@@ -38,7 +49,7 @@
           assert.isNotNull(event.detail.items);
           done();
         });
-        googleBooksSearch.handleResponse({"detail": {"response": {"items": {}}}});
+        googleBooksSearch.handleResponse({"detail": {"response": {"items": []}}});
       });
 
       test('fires google-books-search-error event', function(done) {
