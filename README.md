@@ -78,10 +78,10 @@ To run the tests navigate to [http://localhost:8000/test/](http://localhost:8000
 Attribute     | Options              | Default      | Description
 ---           | ---                  | ---          | ---
 `query`       | *string*             | ``           | The text to query for.
-`maxResults`  | *integer*             | 5            | The max number of results to return.
-`orderBy`     | *relevance, newest*  | `relevance`  | The parameter to order the results by.
-`subtitleMaxLength`     | *integer* | 75  | The max number of characters of the subtitle to be displayed.
-`snippetMaxLength`     | *integer*  | 250  | The max number of characters of the text snippets to be displayed.
+`max-results`  | *integer*             | 5            | The max number of results to return.
+`order-by`     | *relevance, newest*  | `relevance`  | The parameter to order the results by.
+`subtitle-max-length`     | *integer* | 75  | The max number of characters of the subtitle to be displayed.
+`snippet-max-length`     | *integer*  | 250  | The max number of characters of the text snippets to be displayed.
 
 ## Events
 
