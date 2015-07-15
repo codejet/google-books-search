@@ -1,5 +1,5 @@
-var React = require('react');
-var Styles = require('./styles.js');
+const React = require('react');
+const Styles = require('./styles.js');
 
 class Items extends React.Component {
   formatAuthorsList(authors) {
@@ -23,7 +23,7 @@ class Items extends React.Component {
   }
 
   render() {
-    var itemNodes = this.props.data.map((item, index) => {
+    const itemNodes = this.props.data.map((item, index) => {
       return (
         <li key={`item${index}`}>
           <article>

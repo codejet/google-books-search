@@ -1,9 +1,9 @@
-var React = require('react');
-var qwest = require('qwest');
+const React = require('react');
+const qwest = require('qwest');
 
-var SearchField = require('../search-field/main.jsx');
-var Items = require('../items/main.jsx');
-var Styles = require('./styles.js');
+const SearchField = require('../search-field/main.jsx');
+const Items = require('../items/main.jsx');
+const Styles = require('./styles.js');
 
 class GoogleBooksSearch extends React.Component {
   constructor() {
@@ -12,7 +12,7 @@ class GoogleBooksSearch extends React.Component {
   }
 
   componentDidMount() {
-    var query = this.props.query;
+    const query = this.props.query;
 
     if (query) {
       this.doSearch(query);
