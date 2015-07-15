@@ -26,10 +26,8 @@ gulp.task('watch', function() {
   gulp.watch(path.HTML, ['copy']);
 
   var watcher  = watchify(browserify({
-    entries: [path.ENTRY_POINT],
-    transform: [
-      [babelify]
-    ],
+    entries: path.ENTRY_POINT,
+    transform: babelify,
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
   }));
@@ -49,10 +47,8 @@ gulp.task('default', ['watch']);
 
 gulp.task('build', function(){
   browserify({
-    entries: [path.ENTRY_POINT],
-    transform: [
-      [babelify]
-    ]
+    entries: path.ENTRY_POINT,
+    transform: babelify
   })
     .bundle()
     .pipe(source(path.MINIFIED_OUT))
