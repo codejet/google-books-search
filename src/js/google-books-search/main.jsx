@@ -20,11 +20,13 @@ class GoogleBooksSearch extends React.Component {
   }
 
   doSearch(query) {
+    const { maxResults, orderBy } = this.props;
+
     qwest
       .get('https://www.googleapis.com/books/v1/volumes', {
         "q": query,
-        "maxResults": this.props.maxResults,
-        "orderBy":  this.props.orderBy,
+        "maxResults": maxResults,
+        "orderBy": orderBy,
         "fields": "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"
       })
       .then(response => {
@@ -39,10 +41,14 @@ class GoogleBooksSearch extends React.Component {
   }
 
   render() {
+    const { props, state } = this;
+    const { subtitleMaxLength, snippetMaxLength } = props;
+    const { query, data } = state;
+
     return (
       <div style={Styles.host}>
-        <SearchField query={this.state.query} onUserAction={this.doSearch.bind(this)} />
-        <Items subtitleMaxLength={this.props.subtitleMaxLength} snippetMaxLength={this.props.snippetMaxLength} data={this.state.data} />
+        <SearchField query={query} onUserAction={this.doSearch.bind(this)} />
+        <Items subtitleMaxLength={subtitleMaxLength} snippetMaxLength={snippetMaxLength} data={data} />
       </div>
     );
   }

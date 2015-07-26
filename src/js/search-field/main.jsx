@@ -17,12 +17,14 @@ class SearchField extends React.Component {
   }
 
   render() {
+    const { wrapper, label, input, icon } = Styles;
+
     return (
-      <div style={Styles.wrapper}>
-        <label style={Styles.label} htmlFor="search">Search Terms</label>
+      <div style={wrapper}>
+        <label style={label} htmlFor="search">Search Terms</label>
         <input
           ref="queryInput"
-          style={Styles.input}
+          style={input}
           id="search"
           autoComplete="off"
           type="search"
@@ -32,7 +34,7 @@ class SearchField extends React.Component {
         <svg
           ref="searchIcon"
           onClick={this.handleUserAction.bind(this)}
-          style={Styles.icon}
+          style={icon}
           viewBox="0 0 24 24"
           height="100%"
           width="100%"

@@ -24,28 +24,30 @@ class Items extends React.Component {
 
   render() {
     const itemNodes = this.props.data.map((item, index) => {
+      const { title, previewLink, info, details, cover, snippet, detailsClear } = Styles.item;
+
       return (
         <li key={`item${index}`}>
           <article>
-            <h1 style={Styles.item.title}>
-              <a href={item.volumeInfo.previewLink} target="_blank" style={Styles.item.previewLink}>
+            <h1 style={title}>
+              <a href={item.volumeInfo.previewLink} target="_blank" style={previewLink}>
                 {item.volumeInfo.title}{item.volumeInfo.subtitle ? ': ' + this.truncateSubtitle(item.volumeInfo.subtitle) : ''}
               </a>
             </h1>
-            <div style={Styles.item.info}>
+            <div style={info}>
               {item.volumeInfo.authors ? this.formatAuthorsList(item.volumeInfo.authors) : ''}
               {item.volumeInfo.authors && item.volumeInfo.publishedDate ? ' - ' : ''}
               {item.volumeInfo.publishedDate ? this.extractPubDateYear(item.volumeInfo.publishedDate) : ''}
             </div>
-            <div style={Styles.item.details}>
-              <div style={Styles.item.cover}>
+            <div style={details}>
+              <div style={cover}>
                 <a href={item.volumeInfo.previewLink} target="_blank">
                   <img src={item.volumeInfo.imageLinks.smallThumbnail} alt={item.volumeInfo.title} height="80" />
                 </a>
               </div>
-              <div style={Styles.item.snippet} dangerouslySetInnerHTML={{__html: item.searchInfo ? this.truncateSnippet(item.searchInfo.textSnippet) : ''}} />
+              <div style={snippet} dangerouslySetInnerHTML={{__html: item.searchInfo ? this.truncateSnippet(item.searchInfo.textSnippet) : ''}} />
             </div>
-            <div style={Styles.item.detailsClear} />
+            <div style={detailsClear} />
           </article>
         </li>
       );
