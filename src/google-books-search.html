@@ -100,30 +100,30 @@
       <paper-icon-button icon="search"></paper-icon-button>
     </div>
     <ul class="items">
-      <template is="dom-repeat" items="{{items}}">
+      <template is="dom-repeat" items="[[items]]">
         <li>
           <article>
             <h1 class="item-title">
-              <a class="item-preview-link" href="{{item.volumeInfo.previewLink}}" target="_blank">
-                <span>{{item.volumeInfo.title}}</span><template is="dom-if" if="{{item.volumeInfo.subtitle}}" restamp="true">: <span>{{truncateSubtitle(item.volumeInfo.subtitle)}}</span></template>
+              <a class="item-preview-link" href="[[item.volumeInfo.previewLink]]" target="_blank">
+                <span>[[item.volumeInfo.title]]</span><template is="dom-if" if="[[item.volumeInfo.subtitle]]" restamp="true">: <span>[[truncateSubtitle(item.volumeInfo.subtitle)]]</span></template>
               </a>
             </h1>
             <div class="item-info">
-              <template is="dom-if" if="{{item.volumeInfo.authors}}" restamp="true"><span>{{formatAuthorsList(item.volumeInfo.authors)}}</span></template>
-              <template is="dom-if" if="{{item.volumeInfo.authors && item.volumeInfo.publishedDate}}"> - </template>
-              <template is="dom-if" if="{{item.volumeInfo.publishedDate}}" restamp="true"><span>{{getPubDateYear(item.volumeInfo.publishedDate)}}</span></template>
+              <template is="dom-if" if="[[item.volumeInfo.authors]]" restamp="true"><span>[[formatAuthorsList(item.volumeInfo.authors)]]</span></template>
+              <template is="dom-if" if="[[item.volumeInfo.authors && item.volumeInfo.publishedDate]]"> - </template>
+              <template is="dom-if" if="[[item.volumeInfo.publishedDate]]" restamp="true"><span>[[getPubDateYear(item.volumeInfo.publishedDate)]]</span></template>
             </div>
             <div class="item-details">
-              <template is="dom-if" if="{{item.volumeInfo.imageLinks.smallThumbnail}}" restamp="true">
+              <template is="dom-if" if="[[item.volumeInfo.imageLinks.smallThumbnail]]" restamp="true">
                 <div class="item-cover">
-                  <a href="{{item.volumeInfo.previewLink}}" target="_blank">
-                    <img src="{{item.volumeInfo.imageLinks.smallThumbnail}}" alt="{{item.volumeInfo.title}}" height="80" />
+                  <a href="[[item.volumeInfo.previewLink]]" target="_blank">
+                    <img src="[[item.volumeInfo.imageLinks.smallThumbnail]]" alt="[[item.volumeInfo.title]]" height="80" />
                   </a>
                 </div>
               </template>
-              <template is="dom-if" if="{{item.searchInfo.textSnippet}}" restamp="true">
+              <template is="dom-if" if="[[item.searchInfo.textSnippet]]" restamp="true">
                 <div class="item-snippet">
-                  <div id="snippet" inner-h-t-m-l="{{truncateSnippet(item.searchInfo.textSnippet)}}"></div>
+                  <div id="snippet" inner-h-t-m-l="[[truncateSnippet(item.searchInfo.textSnippet)]]"></div>
                 </div>
               </template>
             </div>
