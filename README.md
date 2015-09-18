@@ -23,7 +23,7 @@ If you wonder about the styles being written in JavaScript, check [this presenta
 
 ## Install
 
-You need [Node.js](http://nodejs.org/). Since [Jest](https://facebook.github.io/jest/), the testing framework I'm using, still seems to have some issues with version 0.12.0 of Node.js, you have to go with 0.10.36 here (to manage multiple active Node.js versions you can use [nvm](https://github.com/creationix/nvm)). Then:
+You need [Node.js](http://nodejs.org/). Then:
 
 1. Clone the repository
 2. Go to the project folder and get the dependencies:
@@ -31,8 +31,6 @@ You need [Node.js](http://nodejs.org/). Since [Jest](https://facebook.github.io/
     ```
     $ npm install
     ```
-
-You don't need to fire up a server to check the element. Just open the index.html inside the dist folder in a modern browser of your choice.
 
 ## Development
 
@@ -49,6 +47,22 @@ $ gulp production
 ```
 
 See the `gulpfile.js` for details.
+
+In order to run it locally you can launch a web server.
+
+If you have Ruby installed:
+
+```sh
+$ ruby -run -e httpd . -p 8000 # choose whichever port you prefer
+```
+
+If you have Python installed:
+
+```sh
+$ python -m SimpleHTTPServer # uses port 8000 by default
+```
+
+Then just navigate to http://localhost:8000/dist/.
 
 ## Usage
 
