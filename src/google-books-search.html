@@ -12,9 +12,8 @@
     paper-icon-button {
       margin: 0;
       padding: 0;
-    }
-    paper-icon-button::shadow #ink {
-      opacity: 0;
+      height: 24px;
+      width: 24px;
     }
     .search-wrapper {
       border: 1px solid gray;
@@ -32,7 +31,7 @@
     .search {
       -webkit-appearance: none;
       vertical-align: middle;
-      /* fomrer core-input styles */
+      /* former core-input styles */
       width: 20em;
       font: inherit;
       margin: 0;
@@ -97,7 +96,7 @@
         on-change="handleChange"
         placeholder="Enter searchterm here"
         value="{{value::input}}" />
-      <paper-icon-button icon="search"></paper-icon-button>
+      <paper-icon-button icon="search" noink></paper-icon-button>
     </div>
     <ul class="items">
       <template is="dom-repeat" items="[[items]]">

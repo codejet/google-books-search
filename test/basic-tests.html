@@ -89,7 +89,7 @@
           assert.equal(googleBooksSearch.truncateSnippet('This is a test snippet'), 'This is a test ...');
         });
 
-        test('doesn not truncate snippet when it is shorter than the snippetMaxLength', function() {
+        test('does not truncate snippet when it is shorter than the snippetMaxLength', function() {
           assert.equal(googleBooksSearch.truncateSnippet('Snippet'), 'Snippet');
         });
       });
