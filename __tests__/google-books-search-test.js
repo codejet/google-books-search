@@ -1,14 +1,14 @@
 jest.dontMock('../src/js/google-books-search/main.jsx');
 
 describe('GoogleBooksSearch', function() {
-  var React = require('react/addons');
-  var TestUtils = React.addons.TestUtils;
-  var qwest = require('qwest');
-  var GoogleBooksSearch = require('../src/js/google-books-search/main.jsx');
+  const React = require('react');
+  const TestUtils = require('react-addons-test-utils');
+  const qwest = require('qwest');
+  const GoogleBooksSearch = require('../src/js/google-books-search/main.jsx');
 
   describe('with no query attribute being present on the element', function() {
     it('does not trigger an initial search', function() {
-      var googleBookSearch = TestUtils.renderIntoDocument(
+      const googleBookSearch = TestUtils.renderIntoDocument(
         <GoogleBooksSearch />
       );
 
@@ -18,7 +18,7 @@ describe('GoogleBooksSearch', function() {
 
   describe('with a query attribute being present on the element', function() {
     it('inits the initial search with the given attribute values', function() {
-      var googleBookSearch = TestUtils.renderIntoDocument(
+      const googleBookSearch = TestUtils.renderIntoDocument(
         <GoogleBooksSearch query="css" maxResults="10" orderBy="newest" />
       );
 

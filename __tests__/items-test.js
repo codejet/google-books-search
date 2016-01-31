@@ -1,7 +1,7 @@
 jest.dontMock('../src/js/items/main.jsx');
 
 describe('Items', function() {
-  var data = [
+  const data = [
     {
       "volumeInfo": {
         "title": "Beginning HTML5 and CSS3",
@@ -37,13 +37,14 @@ describe('Items', function() {
       }
     }
   ];
-  var React = require('react/addons');
-  var TestUtils = React.addons.TestUtils;
-  var Items = require('../src/js/items/main.jsx');
-  var items = TestUtils.renderIntoDocument(
+  const React = require('react');
+  const ReactDOM = require('react-dom');
+  const TestUtils = require('react-addons-test-utils');
+  const Items = require('../src/js/items/main.jsx');
+  const items = TestUtils.renderIntoDocument(
     <Items subtitleMaxLength={10} snippetMaxLength={15} data={data} />
   );
-  var results = React.findDOMNode(items, 'li');
+  const results = ReactDOM.findDOMNode(items, 'li');
 
   it('renders all received items', function() {
     expect(results.attributes.length).toEqual(2);

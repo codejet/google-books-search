@@ -1,9 +1,10 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const Styles = require('./styles.js');
 
 class SearchField extends React.Component {
   handleUserAction() {
-    const query = React.findDOMNode(this.refs.queryInput).value;
+    const query = ReactDOM.findDOMNode(this.refs.queryInput).value;
 
     if (query && query !== this.props.query) {
       this.props.onUserAction(query);

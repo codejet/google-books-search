@@ -95,8 +95,6 @@ You can also run single tests:
 $ npm test <filename of test (i.e. items etc.)>
 ```
 
-This might cause an error if you're using nvm though. In that case you have to run the full suite for now.
-
 ## Options
 
 Attribute     | Options              | Default      | Description

@@ -1,6 +1,5 @@
 {
   "name": "google-books-search",
-  "version": "0.1.3",
   "author": "Oliver Schmidt",
   "contributors": [{
     "name": "Rafal Bromirski",
@@ -33,8 +32,10 @@
   },
   "dependencies": {
     "document-register-element": "^0.4.3",
-    "reactive-elements": "^0.4.9",
-    "react": "^0.13.3",
+    "reactive-elements": "^0.6.3",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-addons-test-utils": "^0.14.7",
     "qwest": "^1.7.0"
   },
   "devDependencies": {
@@ -45,7 +46,7 @@
     "gulp-html-replace": "^1.5.0",
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "1.1.0",
-    "jest-cli": "^0.5.5",
+    "jest-cli": "^0.8.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.2"
   }
