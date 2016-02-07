@@ -6,8 +6,9 @@ const Items = require('../items/main.jsx');
 const Styles = require('./styles.js');
 
 class GoogleBooksSearch extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.doSearch = this.doSearch.bind(this);
     this.state = {data: []};
   }
 
@@ -47,7 +48,7 @@ class GoogleBooksSearch extends React.Component {
 
     return (
       <div style={Styles.host}>
-        <SearchField query={query} onUserAction={this.doSearch.bind(this)} />
+        <SearchField query={query} onUserAction={this.doSearch} />
         <Items subtitleMaxLength={subtitleMaxLength} snippetMaxLength={snippetMaxLength} data={data} />
       </div>
     );

@@ -3,6 +3,12 @@ const ReactDOM = require('react-dom');
 const Styles = require('./styles.js');
 
 class SearchField extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleUserAction = this.handleUserAction.bind(this);
+  }
+
   handleUserAction() {
     const query = ReactDOM.findDOMNode(this.refs.queryInput).value;
 
@@ -31,10 +37,10 @@ class SearchField extends React.Component {
           type="search"
           placeholder="Enter searchterm here"
           aria-label="Enter searchterm here"
-          onKeyPress={this.handleKeyPress.bind(this)} />
+          onKeyPress={this.handleKeyPress} />
         <svg
           ref="searchIcon"
-          onClick={this.handleUserAction.bind(this)}
+          onClick={this.handleUserAction}
           style={icon}
           viewBox="0 0 24 24"
           height="100%"
