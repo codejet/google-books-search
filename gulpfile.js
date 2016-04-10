@@ -25,19 +25,23 @@ gulp.task('copy', function(){
 gulp.task('watch', function() {
   gulp.watch(path.HTML, ['copy']);
 
-  var watcher  = watchify(browserify({
-    entries: path.ENTRY_POINT,
-    transform: babelify,
-    debug: true,
-    cache: {}, packageCache: {}, fullPaths: true
-  }));
+  var watcher  = watchify(
+    browserify({
+      entries: path.ENTRY_POINT,
+      debug: true,
+      cache: {}, packageCache: {}, fullPaths: true
+    })
+    .transform('babelify', {
+      presets: ['es2015', 'react']
+    })
+  );
 
   return watcher.on('update', function () {
     watcher.bundle()
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST_SRC))
       console.log('Updated');
-  })
+    })
     .bundle()
     .pipe(source(path.OUT))
     .pipe(gulp.dest(path.DEST_SRC));
@@ -48,8 +52,8 @@ gulp.task('default', ['watch']);
 gulp.task('build', function(){
   browserify({
     entries: path.ENTRY_POINT,
-    transform: babelify
   })
+    .transform('babelify', {presets: ['es2015', 'react']})
     .bundle()
     .pipe(source(path.MINIFIED_OUT))
     .pipe(streamify(uglify(path.MINIFIED_OUT)))
