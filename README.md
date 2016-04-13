@@ -37,42 +37,28 @@ You need [Node.js](http://nodejs.org/). Then:
 During development run:
 
 ```
-$ gulp
+$ webpack -w
 ```
 
-To get a production build run:
+See `webpack.config.js` for details.
+
+In order to run it locally:
 
 ```
-$ gulp production
+$ npm start
 ```
 
-See the `gulpfile.js` for details.
-
-In order to run it locally you can launch a web server.
-
-If you have Ruby installed:
-
-```sh
-$ ruby -run -e httpd . -p 8000 # choose whichever port you prefer
-```
-
-If you have Python installed:
-
-```sh
-$ python -m SimpleHTTPServer # uses port 8000 by default
-```
-
-Then just navigate to http://localhost:8000/dist/.
+Then just navigate to http://localhost:8080/.
 
 ## Usage
 
 1. Import the JS:
 
     ```html
-    <script src="path/to/file/build.min.js"></script>
+    <script src="path/to/file/build.js"></script>
     ```
 
-2. Start using it!
+2. Start using it:
 
     ```html
     <google-books-search></google-books-search>
