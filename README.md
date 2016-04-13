@@ -17,8 +17,6 @@ To make the custom element work with React I use [ReactiveElements](https://gith
 
 Besides that I decided to go with [document-register-element](https://github.com/WebReflection/document-register-element), a lightweight custom elements polyfill, and [qwest](https://github.com/pyrsmk/qwest), an ajax library based on promises behaviour.
 
-The React components are written in CommonJS format and made available in the browser using [Browserify](http://browserify.org/).
-
 If you wonder about the styles being written in JavaScript, check [this presentation](https://speakerdeck.com/vjeux/react-css-in-js) by [vjeux](https://github.com/vjeux) of Facebook for a broader discussion of the topic. I mainly used this approach here because it provides scoped styles, just like the shadow DOM does for the Polymer element.
 
 ## Install
