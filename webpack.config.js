@@ -6,7 +6,8 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 module.exports = {
   entry: [
-    './src/js/init.js'
+    './src/js/init.js',
+    'webpack-dev-server/client?http://localhost:8080/'
   ],
   output: {
     filename: 'build.js',
