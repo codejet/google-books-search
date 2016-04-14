@@ -35,18 +35,18 @@ You need [Node.js](http://nodejs.org/). Then:
 During development run:
 
 ```
-$ webpack -w
+$ npm run watch
 ```
 
-See `webpack.config.js` for details.
-
-In order to run it locally:
+In order to run it locally in your browser:
 
 ```
 $ npm start
 ```
 
 Then just navigate to http://localhost:8080/.
+
+See `webpack.config.js` and `package.json` for details.
 
 ## Usage
 

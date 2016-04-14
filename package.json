@@ -24,8 +24,9 @@
     "google-books"
   ],
   "scripts": {
+    "start": "webpack-dev-server",
     "test": "jest",
-    "start": "webpack-dev-server --content-base build"
+    "watch": "webpack -w"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",

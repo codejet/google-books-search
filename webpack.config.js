@@ -17,5 +17,8 @@ module.exports = {
       {test: /\.jsx?$/, include: __dirname + '/src/js', loader: 'babel-loader'}
     ]
   },
-  plugins: [HTMLWebpackPluginConfig]
+  plugins: [HTMLWebpackPluginConfig],
+  devServer: {
+    contentBase: "./build"
+  }
 };
