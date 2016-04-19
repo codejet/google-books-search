@@ -1,11 +1,11 @@
-jest.dontMock('../src/js/google-books-search/main.jsx');
+jest.unmock('../src/js/google-books-search.jsx');
+
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import qwest from 'qwest';
+import { GoogleBooksSearch } from '../src/js/google-books-search.jsx';
 
 describe('GoogleBooksSearch', function() {
-  const React = require('react');
-  const TestUtils = require('react-addons-test-utils');
-  const qwest = require('qwest');
-  const GoogleBooksSearch = require('../src/js/google-books-search/main.jsx');
-
   describe('with no query attribute being present on the element', function() {
     it('does not trigger an initial search', function() {
       const googleBookSearch = TestUtils.renderIntoDocument(

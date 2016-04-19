@@ -1,10 +1,11 @@
-jest.dontMock('../src/js/search-field/main.jsx');
+jest.unmock('../src/js/search-field.jsx');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import { SearchField } from '../src/js/search-field.jsx';
 
 describe('SearchField', function() {
-  const React = require('react');
-  const ReactDOM = require('react-dom');
-  const TestUtils = require('react-addons-test-utils');
-  const SearchField = require('../src/js/search-field/main.jsx');
   const node = document.createElement('div');
   let onUserActionCallback, searchField, input, icon;
 
@@ -65,4 +66,3 @@ describe('SearchField', function() {
     });
   });
 });
-

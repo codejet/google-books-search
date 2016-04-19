@@ -1,0 +1,33 @@
+.icon {
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
+  margin-left: 5px;
+  vertical-align: middle;
+  width: 24px;
+}
+
+.input {
+  -webkit-appearance: none;
+  border: 0;
+  font: inherit;
+  outline: none;
+  padding: 0;
+  vertical-align: middle;
+  width: 20em;
+}
+
+.label {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.wrapper {
+  border: 1px solid gray;
+  display: inline-block;
+  margin: 0;
+  padding: 0 5px;
+}

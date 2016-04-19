@@ -1,8 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Styles = require('./styles.js');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import CSSModules from 'react-css-modules';
+import styles from '../css/search-field.css';
 
-class SearchField extends React.Component {
+export class SearchField extends React.Component {
   constructor(props) {
     super(props)
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -24,14 +25,12 @@ class SearchField extends React.Component {
   }
 
   render() {
-    const { wrapper, label, input, icon } = Styles;
-
     return (
-      <div style={wrapper}>
-        <label style={label} htmlFor="search">Search Terms</label>
+      <div styleName="wrapper">
+        <label styleName="label" htmlFor="search">Search Terms</label>
         <input
           ref="queryInput"
-          style={input}
+          styleName="input"
           id="search"
           autoComplete="off"
           type="search"
@@ -41,7 +40,7 @@ class SearchField extends React.Component {
         <svg
           ref="searchIcon"
           onClick={this.handleUserAction}
-          style={icon}
+          styleName="icon"
           viewBox="0 0 24 24"
           height="100%"
           width="100%"
@@ -55,4 +54,4 @@ class SearchField extends React.Component {
   }
 }
 
-module.exports = SearchField;
+export default CSSModules(SearchField, styles);

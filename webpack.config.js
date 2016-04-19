@@ -1,9 +1,6 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/src/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: [
     './src/js/init.js',
@@ -15,10 +12,20 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.jsx?$/, include: __dirname + '/src/js', loader: 'babel-loader'}
+      { test: /\.jsx?$/, include: __dirname + '/src/js', loader: 'babel-loader' },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]') },
     ]
   },
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: __dirname + '/src/index.html',
+      filename: 'index.html',
+      inject: 'body'
+    }),
+    new ExtractTextPlugin('/dist/build.css', {
+        allChunks: true
+    })
+  ],
   devServer: {
     contentBase: "./build"
   }

@@ -1,7 +1,8 @@
-const React = require('react');
-const Styles = require('./styles.js');
+import React from 'react';
+import CSSModules from 'react-css-modules';
+import styles from '../css/items.css';
 
-class Items extends React.Component {
+export class Items extends React.Component {
   formatAuthorsList(authors) {
     return authors.join(', ');
   }
@@ -24,41 +25,39 @@ class Items extends React.Component {
 
   render() {
     const itemNodes = this.props.data.map((item, index) => {
-      const { title, previewLink, info, details, cover, snippet, detailsClear } = Styles.item;
-
       return (
         <li key={`item${index}`}>
           <article>
-            <h1 style={title}>
-              <a href={item.volumeInfo.previewLink} target="_blank" style={previewLink}>
+            <h1 styleName="item-title">
+              <a href={item.volumeInfo.previewLink} target="_blank" styleName="item-preview-link">
                 {item.volumeInfo.title}{item.volumeInfo.subtitle ? ': ' + this.truncateSubtitle(item.volumeInfo.subtitle) : ''}
               </a>
             </h1>
-            <div style={info}>
+            <div styleName="item-info">
               {item.volumeInfo.authors ? this.formatAuthorsList(item.volumeInfo.authors) : ''}
               {item.volumeInfo.authors && item.volumeInfo.publishedDate ? ' - ' : ''}
               {item.volumeInfo.publishedDate ? this.extractPubDateYear(item.volumeInfo.publishedDate) : ''}
             </div>
-            <div style={details}>
-              <div style={cover}>
+            <div styleName="item-details">
+              <div styleName="item-cover">
                 <a href={item.volumeInfo.previewLink} target="_blank">
                   <img src={item.volumeInfo.imageLinks.smallThumbnail} alt={item.volumeInfo.title} height="80" />
                 </a>
               </div>
-              <div style={snippet} dangerouslySetInnerHTML={{__html: item.searchInfo ? this.truncateSnippet(item.searchInfo.textSnippet) : ''}} />
+              <div styleName="item-snippet" dangerouslySetInnerHTML={{__html: item.searchInfo ? this.truncateSnippet(item.searchInfo.textSnippet) : ''}} />
             </div>
-            <div style={detailsClear} />
+            <div styleName="item-details" />
           </article>
         </li>
       );
     });
 
     return (
-      <ul style={Styles.items}>
+      <ul styleName="items">
         {itemNodes}
       </ul>
     );
   }
 }
 
-module.exports = Items;
+export default CSSModules(Items, styles);

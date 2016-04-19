@@ -1,4 +1,9 @@
-jest.dontMock('../src/js/items/main.jsx');
+jest.unmock('../src/js/items.jsx');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import { Items } from '../src/js/items.jsx';
 
 describe('Items', function() {
   const data = [
@@ -37,17 +42,13 @@ describe('Items', function() {
       }
     }
   ];
-  const React = require('react');
-  const ReactDOM = require('react-dom');
-  const TestUtils = require('react-addons-test-utils');
-  const Items = require('../src/js/items/main.jsx');
   const items = TestUtils.renderIntoDocument(
     <Items subtitleMaxLength={10} snippetMaxLength={15} data={data} />
   );
   const results = ReactDOM.findDOMNode(items, 'li');
 
   it('renders all received items', function() {
-    expect(results.attributes.length).toEqual(2);
+    expect(TestUtils.scryRenderedDOMComponentsWithTag(items, 'li').length).toEqual(data.length);
   });
 
   it('renders lists of authors correctly', function() {

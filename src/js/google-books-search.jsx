@@ -1,11 +1,11 @@
-const React = require('react');
-const qwest = require('qwest');
+import React from 'react';
+import qwest from 'qwest';
+import CSSModules from 'react-css-modules';
+import styles from '../css/google-books-search.css';
+import SearchField from './search-field.jsx';
+import Items from './items.jsx';
 
-const SearchField = require('../search-field/main.jsx');
-const Items = require('../items/main.jsx');
-const Styles = require('./styles.js');
-
-class GoogleBooksSearch extends React.Component {
+export class GoogleBooksSearch extends React.Component {
   constructor(props) {
     super(props)
     this.doSearch = this.doSearch.bind(this);
@@ -47,7 +47,7 @@ class GoogleBooksSearch extends React.Component {
     const { query, data } = state;
 
     return (
-      <div style={Styles.host}>
+      <div styleName='google-books-search'>
         <SearchField query={query} onUserAction={this.doSearch} />
         <Items subtitleMaxLength={subtitleMaxLength} snippetMaxLength={snippetMaxLength} data={data} />
       </div>
@@ -63,4 +63,4 @@ GoogleBooksSearch.defaultProps = {
   snippetMaxLength: '250'
 }
 
-module.exports = GoogleBooksSearch;
+export default CSSModules(GoogleBooksSearch, styles);
