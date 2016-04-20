@@ -22,7 +22,7 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     }),
-    new ExtractTextPlugin('/dist/build.css', {
+    new ExtractTextPlugin('build.css', {
         allChunks: true
     })
   ],

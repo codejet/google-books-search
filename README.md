@@ -46,6 +46,12 @@ $ npm start
 
 Then just navigate to http://localhost:8080/.
 
+For a production build (saved to the dist folder):
+
+```
+$ webpack -p
+```
+
 See `webpack.config.js` and `package.json` for details.
 
 ## Usage
