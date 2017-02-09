@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>google-books-search</title>
-  <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../bower_components/web-component-tester/browser.js"></script>
   <link rel="import" href="../src/google-books-search.html">
 </head>
@@ -49,7 +49,7 @@
           assert.isNotNull(event.detail.items);
           done();
         });
-        googleBooksSearch.handleResponse({"detail": {"response": {"items": []}}});
+        googleBooksSearch.handleResponse({"detail": { "response": {"items": []} } });
       });
 
       test('fires google-books-search-error event', function(done) {
@@ -61,7 +61,7 @@
           assert.isNotNull(event.detail.error);
           done();
         });
-        googleBooksSearch.handleError({"detail": {"xhr": {"status": 400, "response": "{\"error\": {\"message\": \"Error\"}}"}}});
+        googleBooksSearch.handleError({"detail": {"error": {"message": "Error", "stack": "Error"} } });
       });
 
       suite('formatting of authors list', function() {

@@ -1,6 +1,6 @@
 {
   "name": "google-books-search",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "authors": [
     "Oliver Schmidt"
   ],
@@ -19,13 +19,13 @@
     "bower_components"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~1.2.3",
-    "iron-ajax": "PolymerElements/iron-ajax#~1.1.1",
-    "iron-input": "PolymerElements/iron-input#~1.0.7",
-    "iron-icons": "PolymerElements/iron-icons#~1.0.6",
-    "paper-icon-button": "PolymerElements/paper-icon-button#~1.0.6"
+    "polymer": "Polymer/polymer#2.0-preview",
+    "iron-ajax": "PolymerElements/iron-ajax#2.0-preview",
+    "iron-input": "PolymerElements/iron-input#2.0-preview",
+    "iron-icons": "PolymerElements/iron-icons#2.0-preview",
+    "paper-icon-button": "PolymerElements/paper-button#2.0-preview"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#~v4.0.3"
+    "web-component-tester": "Polymer/web-component-tester#~v5.0.0"
   }
 }

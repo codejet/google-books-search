@@ -4,6 +4,8 @@ A [Polymer](http://www.polymer-project.org/) element for searching Google Books.
 
 This is not an official Google web component. You can find those [here](https://github.com/GoogleWebComponents).
 
+Note: the current version uses the preview of Polymer 2, so even more than the previous versions, this is just meant for exploration of Polymer.
+
 ## Demo
 
 [Check it live.](http://codejet.github.io/google-books-search)
@@ -12,7 +14,7 @@ Alternatively you can follow [this link](http://codejet.github.io/google-books-s
 
 ## Info
 
-At least for now this is a pretty simple element with minimal styling.
+This is a pretty simple element with minimal styling.
 
 For better performance I only request the fields from Google Books that are actually being displayed in the results. What's being returned is thus called a "[partial response](https://developers.google.com/site-verification/v1/performance#partial-response)".
 
@@ -36,13 +38,13 @@ I also created a "reactive version" of this element using [React](http://faceboo
 1. Import Web Components' polyfill:
 
     ```html
-    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="path/to/webcomponents-lite.js"></script>
     ```
 
 2. Import Custom Element:
 
     ```html
-    <link rel="import" href="bower_components/google-books-search/dist/google-books-search.html">
+    <link rel="import" href="path/to/google-books-search.html">
     ```
 
 3. Start using it!
@@ -71,7 +73,11 @@ Then just navigate to http://localhost:8000 using any modern browser.
 
 ## Tests
 
-To run the tests navigate to [http://localhost:8000/test/](http://localhost:8000/test/) or install [Web Component Tester](https://github.com/Polymer/web-component-tester) (follow the link for more information).
+To run the tests you can navigate to [http://localhost:8000/test/](http://localhost:8000/test/) or use the [https://www.npmjs.com/package/polymer-cli](Polymer CLI):
+
+```sh
+$ polymer test
+```
 
 ## Options
 
