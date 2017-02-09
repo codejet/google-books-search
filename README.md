@@ -55,21 +55,13 @@ I also created a "reactive version" of this element using [React](http://faceboo
 
 ## Setup
 
-In order to run it locally you have to launch a web server.
-
-If you have Ruby installed:
+To run it locally, use the [https://www.npmjs.com/package/polymer-cli](Polymer CLI):
 
 ```sh
-$ ruby -run -e httpd . -p 8000 # choose whichever port you prefer
+$ polymer serve
 ```
 
-If you have Python installed:
-
-```sh
-$ python -m SimpleHTTPServer # uses port 8000 by default
-```
-
-Then just navigate to http://localhost:8000 using any modern browser.
+Then just navigate to http://localhost:8080 in any modern browser.
 
 ## Tests
 
