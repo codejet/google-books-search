@@ -1,0 +1,84 @@
+<!--
+@license
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../utils/boot.html">
+<link rel="import" href="../utils/utils.html">
+<link rel="import" href="async.html">
+
+<script>
+(function() {
+  'use strict';
+
+  class Debouncer {
+
+    constructor(context) {
+      this.context = context;
+      /** @type {Function} */
+      this.finish;
+      /** @type {Function} */
+      this.callback;
+      this.boundFlush = () => {this.flush()};
+    }
+
+    /**
+     * @param {function()} callback
+     * @param {?number=} wait
+     */
+    go(callback, wait) {
+      let cancelToken;
+      this.finish = function() {
+        Polymer.Async.cancel(cancelToken);
+      };
+      cancelToken = Polymer.Async.run(this.boundFlush, wait);
+      this.callback = callback;
+    }
+
+    cancel() {
+      if (this.finish) {
+        this.finish();
+        this.finish = null;
+      }
+    }
+
+    flush() {
+      if (this.finish) {
+        this.cancel();
+        this.callback.call(this.context);
+      }
+    }
+
+    /**
+     * @return {boolean}
+     */
+    isActive() {
+      return Boolean(this.finish);
+    }
+
+    /**
+     * @param {Debouncer} debouncer
+     * @param {function()} callback
+     * @param {number=} wait
+     * @param {Object=} context
+     * @return {Debouncer}
+     */
+    static debounce(debouncer, callback, wait, context) {
+      context = context || this;
+      if (debouncer) {
+        debouncer.cancel();
+      } else {
+        debouncer = new Debouncer(context);
+      }
+      debouncer.go(callback, wait);
+      return debouncer;
+    }
+  }
+
+  Polymer.Debouncer = Debouncer;
+})();
+</script>

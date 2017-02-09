@@ -29,6 +29,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </test-fixture>
 
   <script>
+HTMLImports.whenReady(function() {
+
+    if (Polymer.Element) {
+      test('Empty implementation in Polymer 2.0', function() {
+        assert.deepEqual(Polymer.IronFormElementBehavior, {});
+      });
+      return;
+    }
+
     suite('basic', function() {
       var form;
 
@@ -65,6 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
   });
 
+});
   </script>
 
 </body>

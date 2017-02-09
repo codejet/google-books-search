@@ -8,14 +8,16 @@
   "description": "This is a library of accessibility-related testing and utility code.",
   "main": "dist/js/axs_testing.js",
   "moduleType": [
+    "amd",
     "globals"
   ],
   "keywords": [
     "accessibility",
     "testing",
-    "WCAG"
+    "WCAG",
+    "module"
   ],
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "ignore": [
     "**/.*",
     "lib",
@@ -30,9 +32,9 @@
   "_resolution": {
     "type": "version",
     "tag": "v2.11.0",
-    "commit": "4d56f3344155530c95f98780cc54338d9861a9f6"
+    "commit": "69978c7db88ee71e78b3b02ab9614653c961ec9d"
   },
-  "_source": "git://github.com/GoogleChrome/accessibility-developer-tools.git",
-  "_target": "^2.7.0",
-  "_originalSource": "GoogleChrome/accessibility-developer-tools"
+  "_source": "https://github.com/GoogleChrome/accessibility-developer-tools.git",
+  "_target": "^2.10.0",
+  "_originalSource": "accessibility-developer-tools"
 }

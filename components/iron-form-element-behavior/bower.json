@@ -18,14 +18,31 @@
     "url": "git://github.com/PolymerElements/iron-form-element-behavior.git"
   },
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
+    "polymer": "Polymer/polymer#2.0-preview"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^1.0.0",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
-    "web-component-tester": "polymer/web-component-tester#^3.4.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
+    "test-fixture": "PolymerElements/test-fixture#^2.0.0",
+    "web-component-tester": "v6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
-  "ignore": []
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.7.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "paper-styles": "PolymerElements/paper-styles#^1.0.0",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
+  "ignore": [],
+  "resolutions": {
+    "test-fixture": "^2.0.0"
+  }
 }

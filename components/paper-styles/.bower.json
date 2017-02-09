@@ -1,6 +1,5 @@
 {
   "name": "paper-styles",
-  "version": "1.1.1",
   "description": "Common (global) styles for Material Design elements.",
   "authors": [
     "The Polymer Authors"
@@ -21,21 +20,35 @@
     "/.*"
   ],
   "dependencies": {
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview",
     "font-roboto": "PolymerElements/font-roboto#^1.0.1",
-    "polymer": "Polymer/polymer#^1.0.0"
+    "polymer": "polymer/polymer#2.0-preview"
   },
   "devDependencies": {
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
-    "iron-component-page": "polymerelements/iron-component-page#^1.0.0"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1",
+    "web-component-tester": "v6.0.0-prerelease.5"
   },
-  "_release": "1.1.1",
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
+        "font-roboto": "PolymerElements/font-roboto#^1.0.0",
+        "polymer": "Polymer/polymer#^1.1.0"
+      },
+      "devDependencies": {
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
+  "_release": "886fb1e1da",
   "_resolution": {
-    "type": "version",
-    "tag": "v1.1.1",
-    "commit": "fc3ca8dcfc69b9c7a7261e51eefc9741d0f113f8"
+    "type": "branch",
+    "branch": "2.0-preview",
+    "commit": "886fb1e1daebd50e0a0b1691c7df73a9166f4a35"
   },
-  "_source": "git://github.com/PolymerElements/paper-styles.git",
-  "_target": "^1.0.0",
+  "_source": "https://github.com/PolymerElements/paper-styles.git",
+  "_target": "2.0-preview",
   "_originalSource": "PolymerElements/paper-styles"
 }

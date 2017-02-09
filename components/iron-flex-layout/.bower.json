@@ -1,12 +1,12 @@
 {
   "name": "iron-flex-layout",
-  "version": "1.0.3",
   "description": "Provide flexbox-based layouts",
   "keywords": [
     "web-components",
     "polymer",
     "layout"
   ],
+  "main": "iron-flex-layout.html",
   "private": true,
   "license": "http://polymer.github.io/LICENSE.txt",
   "authors": [
@@ -17,20 +17,38 @@
     "url": "git://github.com/PolymerElements/iron-flex-layout.git"
   },
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
+    "polymer": "polymer/polymer#2.0-preview"
   },
   "devDependencies": {
-    "paper-styles": "polymerelements/paper-styles#^1.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "test-fixture": "PolymerElements/test-fixture#^2.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1",
+    "web-component-tester": "v6.0.0-prerelease.5",
+    "iron-demo-helpers": "polymerelements/iron-demo-helpers#2.0-preview"
   },
-  "homepage": "https://github.com/polymerelements/iron-flex-layout",
-  "_release": "1.0.3",
+  "ignore": [],
+  "resolutions": {
+    "test-fixture": "^2.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.1.0"
+      },
+      "devDependencies": {
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+        "iron-demo-helpers": "polymerelements/iron-demo-helpers#^1.0.0"
+      }
+    }
+  },
+  "homepage": "https://github.com/PolymerElements/iron-flex-layout",
+  "_release": "00cf32e5a7",
   "_resolution": {
-    "type": "version",
-    "tag": "v1.0.3",
-    "commit": "e6c2cfec18354973ac03e70dcd8afcc3c72d09b9"
+    "type": "branch",
+    "branch": "2.0-preview",
+    "commit": "00cf32e5a7c05e55bf5f3f282bd8080664a3ff1d"
   },
-  "_source": "git://github.com/polymerelements/iron-flex-layout.git",
-  "_target": "^1.0.0",
-  "_originalSource": "polymerelements/iron-flex-layout"
+  "_source": "https://github.com/PolymerElements/iron-flex-layout.git",
+  "_target": "2.0-preview",
+  "_originalSource": "PolymerElements/iron-flex-layout"
 }

@@ -2,85 +2,86 @@
 <link rel="import" href="../components/iron-input/iron-input.html">
 <link rel="import" href="../components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../components/iron-icons/iron-icons.html">
-<link rel="import" href="../components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../components/paper-icon-button/paper-button.html">
 
 <dom-module id="google-books-search">
-  <style>
-    :host {
-      font-family: sans-serif;
-    }
-    paper-icon-button {
-      margin: 0;
-      padding: 0;
-      height: 24px;
-      width: 24px;
-    }
-    .search-wrapper {
-      border: 1px solid gray;
-      display: inline-block;
-      margin: 0;
-      padding: 0 5px;
-    }
-    .search-label {
-      position: absolute;
-      height: 1px;
-      width: 1px;
-      overflow: hidden;
-      clip: rect(1px, 1px, 1px, 1px);
-    }
-    .search {
-      -webkit-appearance: none;
-      vertical-align: middle;
-      /* former core-input styles */
-      width: 20em;
-      font: inherit;
-      margin: 0;
-      padding: 0;
-      background-color: transparent;
-      border: 0;
-      outline: none;
-    }
-    .search::-webkit-search-decoration {
-      display: none;
-    }
-    .items {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .item-preview-link {
-      text-decoration: none;
-    }
-    .item-preview-link:hover {
-      text-decoration: underline;
-    }
-    .item-title {
-      font-size: 18px;
-      margin-bottom: 0;
-    }
-    .item-info {
-      font-size: 14px;
-      margin-bottom: 1em;
-    }
-    .item-details:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-    .item-cover {
-      float: left;
-      margin-right: .5em;
-    }
-    .item-snippet {
-      font-size: 14px;
-      overflow: hidden;
-    }
-  </style>
   <template>
+    <style>
+      :host {
+        font-family: sans-serif;
+      }
+      paper-button {
+        display: inline-block;
+        height: 24px;
+        margin: 0;
+        min-width: initial;
+        padding: 0;
+        width: 24px;
+      }
+      .search-wrapper {
+        border: 1px solid gray;
+        display: inline-block;
+        margin: 0;
+        padding: 0 5px;
+      }
+      .search-label {
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+      }
+      .search {
+        -webkit-appearance: none;
+        background-color: transparent;
+        border: 0;
+        font: inherit;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        vertical-align: middle;
+        width: 20em;
+      }
+      .search::-webkit-search-decoration {
+        display: none;
+      }
+      .items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .item-preview-link {
+        text-decoration: none;
+      }
+      .item-preview-link:hover {
+        text-decoration: underline;
+      }
+      .item-title {
+        font-size: 18px;
+        margin-bottom: 0;
+      }
+      .item-info {
+        font-size: 14px;
+        margin-bottom: 1em;
+      }
+      .item-details:after {
+        clear: both;
+        content: '';
+        display: block;
+      }
+      .item-cover {
+        float: left;
+        margin-right: .5em;
+      }
+      .item-snippet {
+        font-size: 14px;
+        overflow: hidden;
+      }
+    </style>
     <iron-ajax
       id="ironajax"
       url="https://www.googleapis.com/books/v1/volumes"
-      params="{{ajaxParams}}"
+      params='{{ajaxParams}}'
       handle-as="json"
       on-response="handleResponse"
       on-error="handleError">
@@ -96,135 +97,159 @@
         on-change="handleChange"
         placeholder="Enter searchterm here"
         value="{{value::input}}" />
-      <paper-icon-button icon="search" noink></paper-icon-button>
+      <paper-button noink>
+        <iron-icon icon="search"></iron-icon>
+      </paper-button>
     </div>
     <ul class="items">
-      <template is="dom-repeat" items="[[items]]">
-        <li>
-          <article>
-            <h1 class="item-title">
-              <a class="item-preview-link" href="[[item.volumeInfo.previewLink]]" target="_blank">
-                <span>[[item.volumeInfo.title]]</span><template is="dom-if" if="[[item.volumeInfo.subtitle]]" restamp="true">: <span>[[truncateSubtitle(item.volumeInfo.subtitle)]]</span></template>
-              </a>
-            </h1>
-            <div class="item-info">
-              <template is="dom-if" if="[[item.volumeInfo.authors]]" restamp="true"><span>[[formatAuthorsList(item.volumeInfo.authors)]]</span></template>
-              <template is="dom-if" if="[[item.volumeInfo.authors && item.volumeInfo.publishedDate]]"> - </template>
-              <template is="dom-if" if="[[item.volumeInfo.publishedDate]]" restamp="true"><span>[[getPubDateYear(item.volumeInfo.publishedDate)]]</span></template>
-            </div>
-            <div class="item-details">
-              <template is="dom-if" if="[[item.volumeInfo.imageLinks.smallThumbnail]]" restamp="true">
-                <div class="item-cover">
-                  <a href="[[item.volumeInfo.previewLink]]" target="_blank">
-                    <img src="[[item.volumeInfo.imageLinks.smallThumbnail]]" alt="[[item.volumeInfo.title]]" height="80" />
-                  </a>
-                </div>
-              </template>
-              <template is="dom-if" if="[[item.searchInfo.textSnippet]]" restamp="true">
-                <div class="item-snippet">
-                  <div id="snippet" inner-h-t-m-l="[[truncateSnippet(item.searchInfo.textSnippet)]]"></div>
-                </div>
-              </template>
-            </div>
-          </article>
-        </li>
-      </template>
+      <dom-repeat items="[[items]]">
+        <template>
+          <li>
+            <article>
+              <h1 class="item-title">
+                <a class="item-preview-link" href="[[item.volumeInfo.previewLink]]" target="_blank">
+                  <span>[[item.volumeInfo.title]]</span><template is="dom-if" if="[[item.volumeInfo.subtitle]]" restamp="true">: <span>[[truncateSubtitle(item.volumeInfo.subtitle)]]</span></template>
+                </a>
+              </h1>
+              <div class="item-info">
+                <template is="dom-if" if="[[item.volumeInfo.authors]]" restamp="true"><span>[[formatAuthorsList(item.volumeInfo.authors)]]</span></template>
+                <template is="dom-if" if="[[item.volumeInfo.authors && item.volumeInfo.publishedDate]]"> - </template>
+                <template is="dom-if" if="[[item.volumeInfo.publishedDate]]" restamp="true"><span>[[getPubDateYear(item.volumeInfo.publishedDate)]]</span></template>
+              </div>
+              <div class="item-details">
+                <template is="dom-if" if="[[item.volumeInfo.imageLinks.smallThumbnail]]" restamp="true">
+                  <div class="item-cover">
+                    <a href="[[item.volumeInfo.previewLink]]" target="_blank">
+                      <img src="[[item.volumeInfo.imageLinks.smallThumbnail]]" alt="[[item.volumeInfo.title]]" height="80" />
+                    </a>
+                  </div>
+                </template>
+                <template is="dom-if" if="[[item.searchInfo.textSnippet]]" restamp="true">
+                  <div class="item-snippet">
+                    <div id="snippet" inner-h-t-m-l="[[truncateSnippet(item.searchInfo.textSnippet)]]"></div>
+                  </div>
+                </template>
+              </div>
+            </article>
+          </li>
+        </template>
+      </dom-repeat>
     </ul>
   </template>
-</dom-module>
-<script>
-  Polymer({
-    is: 'google-books-search',
-    properties: {
-      query: {
-        type: String,
-        value: ''
-      },
-      maxResults: {
-        type: Number,
-        value: 5
-      },
-      orderBy: {
-        type: String,
-        value: 'relevance'
-      },
-      subtitleMaxLength: {
-        type: Number,
-        value: 75
-      },
-      snippetMaxLength: {
-        type: Number,
-        value: 250
-      },
-      items: {
-        type: Array,
-        value: []
-      },
-      ajaxParams: {
-        type: String,
-        computed: 'processParams(query, maxResults, orderBy)'
+  <script>
+    class GoogleBooksSearch extends Polymer.Element {
+      static get is() { 
+        return 'google-books-search';
       }
-    },
 
-    processParams: function(query, maxResults, orderBy) {
-      return {
-        q: query,
-        maxResults: maxResults,
-        orderBy: orderBy,
-        fields: "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"
-      };
-    },
-
-    ready: function () {
-      this.initialize();
-    },
-
-    initialize: function() {
-      if (this.query) {
-        this.$.ironajax.generateRequest();
+      static get config() {
+        return {
+          properties: {
+            query: {
+              type: String,
+              value: ''
+            },
+            maxResults: {
+              type: Number,
+              value: 5
+            },
+            orderBy: {
+              type: String,
+              value: 'relevance'
+            },
+            subtitleMaxLength: {
+              type: Number,
+              value: 75
+            },
+            snippetMaxLength: {
+              type: Number,
+              value: 250
+            },
+            items: {
+              type: Array,
+              value: []
+            },
+            ajaxParams: {
+              type: String,
+              computed: 'processParams(query, maxResults, orderBy)'
+            }
+          }
+        };
       }
-    },
 
-    handleChange: function() {
-      if (this.value !== '') {
-        this.items = []; //temporary workaround due to https://github.com/Polymer/polymer/issues/1742
-        this.query = this.value;
-        this.$.ironajax.generateRequest();
+      connectedCallback() {
+        super.connectedCallback();
+        this.initialize();
       }
-    },
 
-    handleResponse: function(event) {
-      this.items = event.detail.response.items;
+      initialize() {
+        if (this.query) {
+          this.$.ironajax.generateRequest();
+        }
+      }
 
-      this.fire('google-books-search-success', {items: this.items});
-    },
+      processParams(query, maxResults, orderBy) {
+        return {
+          "q": query,
+          "maxResults": maxResults,
+          "orderBy": orderBy,
+          "fields": "items(volumeInfo/title,volumeInfo/previewLink,volumeInfo/subtitle,volumeInfo/authors,volumeInfo/publishedDate,volumeInfo/imageLinks/smallThumbnail,searchInfo/textSnippet)"
+        };
+      }
 
-    handleError: function(event) {
-      var xhr = event.detail.xhr,
-          response = JSON.parse(xhr.response);
+      handleChange(event) {
+        if (this.value !== '') {
+          this.items = []; //temporary workaround due to https://github.com/Polymer/polymer/issues/1742
+          this.query = this.value;
+          this.$.ironajax.generateRequest();
+        }
+      }
 
-      console.log('Error: ' + xhr.status + ' - ' + response.error.message);
-      this.fire('google-books-search-error', {error: response.error});
-    },
+      handleResponse({ detail: { response: { items } } }) {
+        this.items = items;
 
-    formatAuthorsList: function(authors) {
-      return authors.join(', ');
-    },
+        this.dispatchEvent(new CustomEvent('google-books-search-success', {
+          bubbles: true,
+          detail: {
+            items,
+          },
+        }));
+      }
 
-    truncateString: function(string, length) {
-      return string.length > length ? string.substr(0, length) + '...' : string;
-    },
+      handleError(event) {
+        var error = event.detail.error;
 
-    truncateSubtitle: function(subtitle) {
-      return this.truncateString(subtitle, this.subtitleMaxLength);
-    },
+        console.log(error.message);
+        this.dispatchEvent(new CustomEvent('google-books-search-error', {
+          bubbles: true,
+          detail: {
+            error,
+          },
+        }));
+      }
 
-    truncateSnippet: function(snippet) {
-      return this.truncateString(snippet, this.snippetMaxLength);
-    },
+      formatAuthorsList(authors) {
+        return authors.join(', ');
+      }
 
-    getPubDateYear: function(date) {
-      return date.length > 4 ? date.split('-')[0] : date;
+      truncateString(string, length) {
+        return string.length > length ? string.substr(0, length) + '...' : string;
+      }
+
+      truncateSubtitle(subtitle) {
+        return this.truncateString(subtitle, this.subtitleMaxLength);
+      }
+
+      truncateSnippet(snippet) {
+        return this.truncateString(snippet, this.snippetMaxLength);
+      }
+
+      getPubDateYear(date) {
+        return date.length > 4 ? date.split('-')[0] : date;
+      }
     }
-  });
-</script>
+
+    // Register custom element definition using standard platform API
+    customElements.define(GoogleBooksSearch.is, GoogleBooksSearch);
+ </script>
+</dom-module>

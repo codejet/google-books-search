@@ -1,6 +1,5 @@
 {
   "name": "iron-validatable-behavior",
-  "version": "1.0.4",
   "description": "Provides a behavior for an element that validates user input",
   "authors": "The Polymer Authors",
   "keywords": [
@@ -9,9 +8,7 @@
     "iron",
     "behavior"
   ],
-  "main": [
-    "iron-validatable-behavior.html"
-  ],
+  "main": "iron-validatable-behavior.html",
   "private": true,
   "repository": {
     "type": "git",
@@ -21,24 +18,42 @@
   "homepage": "https://github.com/PolymerElements/iron-validatable-behavior",
   "ignore": [],
   "dependencies": {
-    "iron-meta": "PolymerElements/iron-meta#^1.0.0",
-    "polymer": "Polymer/polymer#^1.0.0"
+    "iron-meta": "PolymerElements/iron-meta#2.0-preview",
+    "polymer": "Polymer/polymer#2.0-preview"
   },
   "devDependencies": {
-    "paper-styles": "PolymerElements/paper-styles#^1.0.4",
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-validator-behavior": "PolymerElements/iron-validator-behavior#^1.0.0",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
-    "web-component-tester": "*",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "iron-validator-behavior": "PolymerElements/iron-validator-behavior#2.0-preview",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
+    "test-fixture": "PolymerElements/test-fixture#^2.0.0",
+    "web-component-tester": "v6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
-  "_release": "1.0.4",
+  "resolutions": {
+    "test-fixture": "^2.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "iron-meta": "PolymerElements/iron-meta#^1.0.0",
+        "polymer": "Polymer/polymer#^1.1.0"
+      },
+      "devDependencies": {
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "iron-validator-behavior": "PolymerElements/iron-validator-behavior#^1.0.0",
+        "paper-styles": "PolymerElements/paper-styles#^1.0.0",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
+  "_release": "6271378155",
   "_resolution": {
-    "type": "version",
-    "tag": "v1.0.4",
-    "commit": "ff267b561b032608755d705c1a7e346454b0aee4"
+    "type": "branch",
+    "branch": "2.0-preview",
+    "commit": "627137815558aadf8be566fc2a6ec627223ee2b5"
   },
-  "_source": "git://github.com/PolymerElements/iron-validatable-behavior.git",
-  "_target": "^1.0.0",
+  "_source": "https://github.com/PolymerElements/iron-validatable-behavior.git",
+  "_target": "2.0-preview",
   "_originalSource": "PolymerElements/iron-validatable-behavior"
 }
