@@ -10,7 +10,7 @@ Note: the current version uses the preview of Polymer 2, so even more than the p
 
 [Check it live.](http://codejet.github.io/google-books-search)
 
-Alternatively you can follow [this link](http://codejet.github.io/google-books-search/vulcanized.html) to load a "vulcanized" version. [Vulcanize](https://github.com/polymer/vulcanize) is a tool provided by the Polymer folks, and it "recursively pulls in all your imports, flattens their dependencies and spits out something that can potentially reduce the number of network requests your app makes." In other words: it should help with performance.
+Alternatively you can follow [this link](http://codejet.github.io/google-books-search/bundled.html) to load a "bundled" version. [polymer-bundler](https://github.com/polymer/polymer-bundler) (formerly called vulcanize) is a tool provided by the Polymer folks, and it "recursively pulls in all your imports, flattens their dependencies and spits out something that can potentially reduce the number of network requests your app makes." In other words: it should help with performance.
 
 ## Info
 
