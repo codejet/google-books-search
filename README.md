@@ -55,17 +55,17 @@ I also created a "reactive version" of this element using [React](http://faceboo
 
 ## Setup
 
-To run it locally, use the [https://www.npmjs.com/package/polymer-cli](Polymer CLI):
+To run it locally, use the [Polymer CLI](https://www.npmjs.com/package/polymer-cli):
 
 ```sh
 $ polymer serve
 ```
 
-Then just navigate to http://localhost:8080 in any modern browser.
+Then just navigate to the URL given by the CLI using any modern browser.
 
 ## Tests
 
-To run the tests you can navigate to [http://localhost:8000/test/](http://localhost:8000/test/) or use the [https://www.npmjs.com/package/polymer-cli](Polymer CLI):
+To run the tests you can navigate to the URL given by the CLI (see above) followed by "/test", or use the [Polymer CLI](https://www.npmjs.com/package/polymer-cli):
 
 ```sh
 $ polymer test

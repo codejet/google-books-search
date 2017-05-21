@@ -81,7 +81,7 @@
     <iron-ajax
       id="ironajax"
       url="https://www.googleapis.com/books/v1/volumes"
-      params='{{ajaxParams}}'
+      params="{{ajaxParams}}"
       handle-as="json"
       on-response="handleResponse"
       on-error="handleError">
@@ -138,41 +138,39 @@
   </template>
   <script>
     class GoogleBooksSearch extends Polymer.Element {
-      static get is() { 
+      static get is() {
         return 'google-books-search';
       }
 
-      static get config() {
+      static get properties() {
         return {
-          properties: {
-            query: {
-              type: String,
-              value: ''
-            },
-            maxResults: {
-              type: Number,
-              value: 5
-            },
-            orderBy: {
-              type: String,
-              value: 'relevance'
-            },
-            subtitleMaxLength: {
-              type: Number,
-              value: 75
-            },
-            snippetMaxLength: {
-              type: Number,
-              value: 250
-            },
-            items: {
-              type: Array,
-              value: []
-            },
-            ajaxParams: {
-              type: String,
-              computed: 'processParams(query, maxResults, orderBy)'
-            }
+          query: {
+            type: String,
+            value: ''
+          },
+          maxResults: {
+            type: Number,
+            value: 5
+          },
+          orderBy: {
+            type: String,
+            value: 'relevance'
+          },
+          subtitleMaxLength: {
+            type: Number,
+            value: 75
+          },
+          snippetMaxLength: {
+            type: Number,
+            value: 250
+          },
+          items: {
+            type: Array,
+            value: []
+          },
+          ajaxParams: {
+            type: String,
+            computed: 'processParams(query, maxResults, orderBy)'
           }
         };
       }
