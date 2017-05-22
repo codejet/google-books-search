@@ -4,8 +4,6 @@ A [Polymer](http://www.polymer-project.org/) element for searching Google Books.
 
 This is not an official Google web component. You can find those [here](https://github.com/GoogleWebComponents).
 
-Note: the current version uses the preview of Polymer 2, so even more than the previous versions, this is just meant for exploration of Polymer.
-
 ## Demo
 
 [Check it live.](http://codejet.github.io/google-books-search)
